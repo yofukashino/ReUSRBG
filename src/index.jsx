@@ -10,6 +10,7 @@ import {
 } from "./lib/requiredModules.jsx";
 import { USBBG_SERVER_INVITE_CODE, USRBG_URL, defaultSettings } from "./lib/consts.jsx";
 import * as Utils from "./lib/utils.jsx";
+import { registerSettings } from "./Components/Settings.jsx";
 import "./style.css";
 const { Tooltip } = components;
 const PluginInjector = new Injector();
@@ -83,6 +84,7 @@ const applyInjections = () => {
   });
 };
 export const start = () => {
+  registerSettings();
   applyInjections();
 };
 
