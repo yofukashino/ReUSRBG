@@ -12,7 +12,7 @@ import * as Utils from "./lib/utils.jsx";
 import "./style.css";
 const { Tooltip } = components;
 const PluginInjector = new Injector();
-const PluginLogger = Logger.plugin("ReUSRBG");
+export const PluginLogger = Logger.plugin("ReUSRBG");
 const USRBG_response = await fetch(USRBG_URL);
 const USRBG_json = await USRBG_response.json();
 const USRDB = new Map(USRBG_json.map((user) => [user.uid, user]));
