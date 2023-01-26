@@ -83,3 +83,4 @@ export const start = () => {
 export const stop = () => {
   PluginInjector.uninjectAll();
 };
+export { Settings } from "./Components/Settings.jsx";
