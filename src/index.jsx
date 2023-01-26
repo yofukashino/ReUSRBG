@@ -5,6 +5,7 @@ import {
   BannerClasses,
   Clickable,
   IconClasses,
+  InviteActions,
   UserBannerParents,
 } from "./lib/requiredModules.jsx";
 import { USBBG_SERVER_INVITE_CODE, USRBG_URL, defaultSettings } from "./lib/consts.jsx";
