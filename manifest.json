@@ -1,18 +1,18 @@
 {
-  "id": "dev.replugged.PluginTemplate",
-  "name": "Plugin Template",
-  "description": "A plugin template",
+  "id": "Tharki.ReUSRBG",
+  "name": "ReUSRBG",
+  "description": "User profile backgrounds for Replugged. (Banners are fetched from the USRBG database.)",
   "author": {
-    "name": "replugged",
-    "discordID": "1000992611840049192",
-    "github": "replugged-org"
+    "name": "Ahlawat",
+    "discordID": "1025214794766221384",
+    "github": "Tharki-God"
   },
-  "version": "1.0.3",
+  "version": "1.0.0",
   "updater": {
     "type": "github",
-    "id": "replugged-org/plugin-template"
+    "id": "Tharki-God/ReUSRBG"
   },
   "license": "MIT",
   "type": "replugged-plugin",
-  "renderer": "src/index.ts"
+  "renderer": "src/index.jsx"
 }

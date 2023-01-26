@@ -1,0 +1,8 @@
+.banner-2boKnS > .usr-bg-icon-clickable {
+  opacity: 0% !important;
+
+  transition: all 0.2s ease-in-out;
+}
+.banner-2boKnS:hover > .usr-bg-icon-clickable {
+  opacity: 100% !important;
+}
