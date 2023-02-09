@@ -1,6 +1,5 @@
-/* eslint-disable consistent-return */
-/* eslint-disable camelcase */
-
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Injector, Logger, settings } from "replugged";
 import { BannerClasses, Clickable, UserBannerParents } from "./lib/requiredModules.jsx";
 import { USRBG_URL, defaultSettings } from "./lib/consts.jsx";

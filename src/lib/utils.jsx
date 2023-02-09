@@ -1,4 +1,3 @@
-/* eslint-disable no-prototype-builtins */
 export const isObject = (testMaterial) =>
   typeof testMaterial === "object" && !Array.isArray(testMaterial) && testMaterial != null;
 export const getFunctionKeyFromStrings = (Module, StringArray) =>
