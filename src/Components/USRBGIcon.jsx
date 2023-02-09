@@ -1,6 +1,6 @@
 import { components } from "replugged";
-import { IconClasses, InviteActions } from "./lib/requiredModules.jsx";
-import { USBBG_SERVER_INVITE_CODE } from "./lib/consts.jsx";
+import { IconClasses, InviteActions } from "../lib/requiredModules.jsx";
+import { USBBG_SERVER_INVITE_CODE } from "../lib/consts.jsx";
 const { Tooltip } = components;
 export const USRBGIcon = (
   <Tooltip
