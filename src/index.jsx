@@ -18,14 +18,15 @@ const USRBG_json = await USRBG_response.json();
 const USRDB = new Map(USRBG_json.map((user) => [user.uid, user]));
 PluginLogger.log("Loaded USRBG Database.");
 
-export const usrbg = await settings.init("Tharki.ReUSRBG", defaultSettings);
+export const SettingValues = await settings.init("Tharki.ReUSRBG", defaultSettings);
 
 const applyInjections = () => {
   for (const [UserBanner, FunctionKey] of UserBannerParents) {
     PluginInjector.before(UserBanner, FunctionKey, ([args]) => {
       if (
         !USRDB.has(args.user.id) ||
-        (args?.displayProfile?.premiumType && usrbg.get("nitroBanner", defaultSettings.nitroBanner))
+        (args?.displayProfile?.premiumType &&
+          SettingValues.get("nitroBanner", defaultSettings.nitroBanner))
       )
         return;
       const img = USRDB.get(args.user.id)?.img;
@@ -36,7 +37,8 @@ const applyInjections = () => {
     PluginInjector.after(UserBanner, FunctionKey, ([args], res) => {
       if (
         !USRDB.has(args.user.id) ||
-        (args?.displayProfile?.premiumType && usrbg.get("nitroBanner", defaultSettings.nitroBanner))
+        (args?.displayProfile?.premiumType &&
+          SettingValues.get("nitroBanner", defaultSettings.nitroBanner))
       )
         return;
       res.props.isPremium = true;
