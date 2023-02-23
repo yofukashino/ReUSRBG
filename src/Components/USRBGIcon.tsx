@@ -1,11 +1,11 @@
 import { components } from "replugged";
-import { IconClasses, InviteActions } from "../lib/requiredModules.jsx";
-import { USBBG_SERVER_INVITE_CODE } from "../lib/consts.jsx";
+import { IconClasses, InviteActions } from "../lib/requiredModules";
+import { USBBG_SERVER_INVITE_CODE } from "../lib/consts";
 const { Tooltip } = components;
 export const USRBGIcon = (
   <Tooltip
-    text="USRBG Banner"
     {...{
+      text: "USRBG Banner",
       className: `${IconClasses.iconItem} usr-bg-icon-clickable`,
       style: {
         display: "block",

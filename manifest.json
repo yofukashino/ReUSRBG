@@ -7,12 +7,12 @@
     "discordID": "1025214794766221384",
     "github": "Tharki-God"
   },
-  "version": "1.1.5",
+  "version": "1.1.6",
   "updater": {
     "type": "github",
     "id": "Tharki-God/ReUSRBG"
   },
   "license": "MIT",
   "type": "replugged-plugin",
-  "renderer": "src/index.jsx"
+  "renderer": "src/index.ts"
 }
