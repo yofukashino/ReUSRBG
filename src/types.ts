@@ -100,51 +100,6 @@ export interface USRBD_USER {
   uid: string;
   _id: string;
 }
-export interface BannerClasses {
-  avatarDecorationHint: string;
-  avatarHint: string;
-  avatarHintInner: string;
-  avatarHoverTarget: string;
-  avatarPositionNormal: string;
-  avatarPositionPanel: string;
-  avatarPositionPremiumBanner: string;
-  avatarPositionPremiumNoBanner: string;
-  avatarWrapper: string;
-  avatarWrapperNonUserBot: string;
-  avatarWrapperNormal: string;
-  banner: string;
-  bannerHeightPanel: string;
-  bannerHeightPopout: string;
-  bannerHeightProfile: string;
-  bannerPremium: string;
-  betaTag: string;
-  betaTagHidden: string;
-  betaTagTooltip: string;
-  betaTagVisible: string;
-  clickable: string;
-  gifTag: string;
-  panelBanner: string;
-  pencilContainer: string;
-  pencilIcon: string;
-  popoutBanner: string;
-  popoutBannerPremium: string;
-  popoutNoBannerPremium: string;
-  premiumBannerHeightNoBannerImagePopout: string;
-  premiumBannerHeightPopout: string;
-  premiumBannerHeightProfile: string;
-  premiumBannerHeightSettings: string;
-  premiumIcon: string;
-  premiumIconTooltipContent: string;
-  premiumIconWrapper: string;
-  profileBadges: string;
-  profileBanner: string;
-  profileBannerPremium: string;
-  reducedMotion: string;
-  roundedBanner: string;
-  settingsBanner: string;
-  visible: string;
-  warningCircleIcon: string;
-}
 export interface InviteActions {
   acceptInvite: DefaultTypes.AnyFunction;
   acceptInviteAndTransitionToInviteChannel: DefaultTypes.AnyFunction;
@@ -162,8 +117,47 @@ export interface InviteActions {
   transitionToInviteChannelSync: DefaultTypes.AnyFunction;
   transitionToInviteSync: DefaultTypes.AnyFunction;
 }
-export interface CanBeAnyObject {
-  [key: string]: DefaultTypes.AnyFunction;
+export interface GenericModule {
+  [key: string | number]: DefaultTypes.AnyFunction;
+}
+export interface GenericExport {
+  exports: GenericModule;
+}
+export interface AssetsUtils {
+  getAnimatableSourceWithFallback: DefaultTypes.AnyFunction;
+  getApplicationIconSource: DefaultTypes.AnyFunction;
+  getApplicationIconURL: DefaultTypes.AnyFunction;
+  getAvatarDecorationURL: DefaultTypes.AnyFunction;
+  getChannelIconSource: DefaultTypes.AnyFunction;
+  getChannelIconURL: DefaultTypes.AnyFunction;
+  getDefaultAvatarURL: DefaultTypes.AnyFunction;
+  getEmojiURL: DefaultTypes.AnyFunction;
+  getGameAssetSource: DefaultTypes.AnyFunction;
+  getGameAssetURL: DefaultTypes.AnyFunction;
+  getGuildBannerSource: DefaultTypes.AnyFunction;
+  getGuildBannerURL: DefaultTypes.AnyFunction;
+  getGuildDiscoverySplashSource: DefaultTypes.AnyFunction;
+  getGuildDiscoverySplashURL: DefaultTypes.AnyFunction;
+  getGuildHomeHeaderSource: DefaultTypes.AnyFunction;
+  getGuildHomeHeaderURL: DefaultTypes.AnyFunction;
+  getGuildIconSource: DefaultTypes.AnyFunction;
+  getGuildIconURL: DefaultTypes.AnyFunction;
+  getGuildMemberAvatarSource: DefaultTypes.AnyFunction;
+  getGuildMemberAvatarURL: DefaultTypes.AnyFunction;
+  getGuildMemberAvatarURLSimple: DefaultTypes.AnyFunction;
+  getGuildMemberBannerURL: DefaultTypes.AnyFunction;
+  getGuildSplashSource: DefaultTypes.AnyFunction;
+  getGuildSplashURL: DefaultTypes.AnyFunction;
+  getGuildTemplateIconSource: DefaultTypes.AnyFunction;
+  getGuildTemplateIconURL: DefaultTypes.AnyFunction;
+  getUserAvatarColor: DefaultTypes.AnyFunction;
+  getUserAvatarSource: DefaultTypes.AnyFunction;
+  getUserAvatarURL: DefaultTypes.AnyFunction;
+  getUserBannerURL: DefaultTypes.AnyFunction;
+  getVideoFilterAssetURL: DefaultTypes.AnyFunction;
+  hasAnimatedGuildIcon: DefaultTypes.AnyFunction;
+  isAnimatedIconHash: DefaultTypes.AnyFunction;
+  makeSource: DefaultTypes.AnyFunction;
 }
 export interface Settings {
   nitroBanner: boolean;
