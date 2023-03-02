@@ -95,6 +95,20 @@ export interface UserBannerArgs {
   showPremiumBadgeUpsell: boolean;
   user: User;
 }
+export interface UserAvatarArgs {
+  channelId: string;
+  disableUserProfileLink: boolean;
+  displayProfile: displayProfile;
+  guildId: null | string;
+  isHovering: boolean;
+  isMobile: boolean;
+  isStreaming: boolean;
+  onClose: DefaultTypes.AnyFunction;
+  onOpenPremiumSettings: DefaultTypes.AnyFunction;
+  showPremiumBadgeUpsell: boolean;
+  status: string;
+  user: User;
+}
 export interface USRBD_USER {
   img: string;
   uid: string;
@@ -122,42 +136,6 @@ export interface GenericModule {
 }
 export interface GenericExport {
   exports: GenericModule;
-}
-export interface AssetsUtils {
-  getAnimatableSourceWithFallback: DefaultTypes.AnyFunction;
-  getApplicationIconSource: DefaultTypes.AnyFunction;
-  getApplicationIconURL: DefaultTypes.AnyFunction;
-  getAvatarDecorationURL: DefaultTypes.AnyFunction;
-  getChannelIconSource: DefaultTypes.AnyFunction;
-  getChannelIconURL: DefaultTypes.AnyFunction;
-  getDefaultAvatarURL: DefaultTypes.AnyFunction;
-  getEmojiURL: DefaultTypes.AnyFunction;
-  getGameAssetSource: DefaultTypes.AnyFunction;
-  getGameAssetURL: DefaultTypes.AnyFunction;
-  getGuildBannerSource: DefaultTypes.AnyFunction;
-  getGuildBannerURL: DefaultTypes.AnyFunction;
-  getGuildDiscoverySplashSource: DefaultTypes.AnyFunction;
-  getGuildDiscoverySplashURL: DefaultTypes.AnyFunction;
-  getGuildHomeHeaderSource: DefaultTypes.AnyFunction;
-  getGuildHomeHeaderURL: DefaultTypes.AnyFunction;
-  getGuildIconSource: DefaultTypes.AnyFunction;
-  getGuildIconURL: DefaultTypes.AnyFunction;
-  getGuildMemberAvatarSource: DefaultTypes.AnyFunction;
-  getGuildMemberAvatarURL: DefaultTypes.AnyFunction;
-  getGuildMemberAvatarURLSimple: DefaultTypes.AnyFunction;
-  getGuildMemberBannerURL: DefaultTypes.AnyFunction;
-  getGuildSplashSource: DefaultTypes.AnyFunction;
-  getGuildSplashURL: DefaultTypes.AnyFunction;
-  getGuildTemplateIconSource: DefaultTypes.AnyFunction;
-  getGuildTemplateIconURL: DefaultTypes.AnyFunction;
-  getUserAvatarColor: DefaultTypes.AnyFunction;
-  getUserAvatarSource: DefaultTypes.AnyFunction;
-  getUserAvatarURL: DefaultTypes.AnyFunction;
-  getUserBannerURL: DefaultTypes.AnyFunction;
-  getVideoFilterAssetURL: DefaultTypes.AnyFunction;
-  hasAnimatedGuildIcon: DefaultTypes.AnyFunction;
-  isAnimatedIconHash: DefaultTypes.AnyFunction;
-  makeSource: DefaultTypes.AnyFunction;
 }
 export interface Settings {
   nitroBanner: boolean;
