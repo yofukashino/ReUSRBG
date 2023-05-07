@@ -12,7 +12,6 @@ export const patchBanners = (): void => {
   ) as unknown as string;
   PluginInjector.before(UserBannerParent, funtionKey, (args: [Types.UserBannerArgs]) => {
     const [UserBannerArgs] = args;
-    console.log(UserBannerArgs.displayProfile);
     if (
       !USRDB.has(UserBannerArgs.user.id) ||
       (UserBannerArgs?.user?.premiumType &&
