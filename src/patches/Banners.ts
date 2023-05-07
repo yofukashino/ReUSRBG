@@ -1,6 +1,6 @@
 import { webpack } from "replugged";
 import { PluginInjector, SettingValues, USRDB } from "../index";
-import { defaultSettings } from "../lib/consts";
+import { defaultSettings, displayProfileGetterList } from "../lib/consts";
 import { UserBannerParent } from "../lib/requiredModules";
 import { USRBGIcon } from "../Components/USRBGIcon";
 import * as Types from "../types";
@@ -12,6 +12,7 @@ export const patchBanners = (): void => {
   ) as unknown as string;
   PluginInjector.before(UserBannerParent, funtionKey, (args: [Types.UserBannerArgs]) => {
     const [UserBannerArgs] = args;
+    console.log(UserBannerArgs.displayProfile);
     if (
       !USRDB.has(UserBannerArgs.user.id) ||
       (UserBannerArgs?.user?.premiumType &&
@@ -21,6 +22,14 @@ export const patchBanners = (): void => {
     const { img } = USRDB.get(UserBannerArgs.user.id);
     UserBannerArgs.bannerSrc = img;
     if (!UserBannerArgs.displayProfile) return args;
+    const originalGetterProperties = Object.fromEntries(
+      displayProfileGetterList.map((key) => [key, UserBannerArgs.displayProfile[key]]),
+    );
+    for (const key in originalGetterProperties)
+      Object.defineProperty(UserBannerArgs.displayProfile, key, {
+        get: () => originalGetterProperties[key],
+        configurable: true,
+      });
     Object.defineProperty(UserBannerArgs.displayProfile, "premiumType", {
       get: () => 2,
       configurable: true,
