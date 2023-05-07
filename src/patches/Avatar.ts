@@ -14,7 +14,7 @@ export const patchAvatars = (): void => {
     const [UserAvatarArgs] = args;
     if (
       !USRDB.has(UserAvatarArgs.user.id) ||
-      (UserAvatarArgs?.displayProfile?.premiumType &&
+      (UserAvatarArgs?.user?.premiumType &&
         SettingValues.get("nitroBanner", defaultSettings.nitroBanner))
     )
       return args;

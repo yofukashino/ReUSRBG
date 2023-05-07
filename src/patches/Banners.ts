@@ -14,13 +14,17 @@ export const patchBanners = (): void => {
     const [UserBannerArgs] = args;
     if (
       !USRDB.has(UserBannerArgs.user.id) ||
-      (UserBannerArgs?.displayProfile?.premiumType &&
+      (UserBannerArgs?.user?.premiumType &&
         SettingValues.get("nitroBanner", defaultSettings.nitroBanner))
     )
       return args;
     const { img } = USRDB.get(UserBannerArgs.user.id);
     UserBannerArgs.bannerSrc = img;
     if (!UserBannerArgs.displayProfile) return args;
+    Object.defineProperty(UserBannerArgs.displayProfile, "premiumType", {
+      get: () => 2,
+      configurable: true,
+    });
     PluginInjector.instead(UserBannerArgs.displayProfile, "getBannerURL", () => img);
   });
 
@@ -31,7 +35,7 @@ export const patchBanners = (): void => {
       const [UserBannerArgs] = args;
       if (
         !USRDB.has(UserBannerArgs.user.id) ||
-        (UserBannerArgs?.displayProfile?.premiumType &&
+        (UserBannerArgs?.user?.premiumType &&
           SettingValues.get("nitroBanner", defaultSettings.nitroBanner))
       )
         return res;
