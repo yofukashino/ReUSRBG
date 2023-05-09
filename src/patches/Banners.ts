@@ -2,7 +2,7 @@ import { webpack } from "replugged";
 import { PluginInjector, SettingValues, USRDB } from "../index";
 import { defaultSettings, displayProfileGetterList } from "../lib/consts";
 import { UserBannerParent } from "../lib/requiredModules";
-import { USRBGIcon } from "../Components/USRBGIcon";
+import USRBGIcon from "../Components/USRBGIcon";
 import * as Types from "../types";
 
 export const patchBanners = (): void => {
@@ -14,7 +14,7 @@ export const patchBanners = (): void => {
     const [UserBannerArgs] = args;
     if (
       !USRDB.has(UserBannerArgs.user.id) ||
-      (UserBannerArgs?.user?.premiumType &&
+      (UserBannerArgs?.displayProfile?._userProfile?.banner &&
         SettingValues.get("nitroBanner", defaultSettings.nitroBanner))
     )
       return args;
