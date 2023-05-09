@@ -34,6 +34,7 @@ export const patchBanners = (): void => {
       configurable: true,
     });
     PluginInjector.instead(UserBannerArgs.displayProfile, "getBannerURL", () => img);
+    return args;
   });
 
   PluginInjector.after(
@@ -43,13 +44,13 @@ export const patchBanners = (): void => {
       const [UserBannerArgs] = args;
       if (
         !USRDB.has(UserBannerArgs.user.id) ||
-        (UserBannerArgs?.user?.premiumType &&
+        (UserBannerArgs?.displayProfile?._userProfile?.banner &&
           SettingValues.get("nitroBanner", defaultSettings.nitroBanner))
       )
         return res;
       res.props.hasBannerImage = true;
       res.props.isPremium = true;
-      res.props.children.props.children = [USRBGIcon];
+      res.props.children.props.children = [<USRBGIcon />];
       return res;
     },
   );

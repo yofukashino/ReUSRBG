@@ -2,7 +2,7 @@ import { components } from "replugged";
 import { IconClasses, InviteActions } from "../lib/requiredModules";
 import { USBBG_SERVER_INVITE_CODE } from "../lib/consts";
 const { Tooltip } = components;
-export default (
+export default () => (
   <Tooltip
     {...{
       text: "USRBG Banner",
