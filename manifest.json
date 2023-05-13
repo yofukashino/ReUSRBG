@@ -1,5 +1,5 @@
 {
-  "id": "Tharki.ReUSRBG",
+  "id": "dev.tharki.ReUSRBG",
   "name": "ReUSRBG",
   "description": "User profile backgrounds for Replugged. (Banners are fetched from the USRBG database.)",
   "author": {
@@ -7,7 +7,7 @@
     "discordID": "1025214794766221384",
     "github": "Tharki-God"
   },
-  "version": "1.2.5",
+  "version": "1.2.6",
   "updater": {
     "type": "github",
     "id": "Tharki-God/ReUSRBG"

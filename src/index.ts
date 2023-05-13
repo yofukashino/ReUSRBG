@@ -15,7 +15,7 @@ export const USRDB = new Map<string, Types.USRBD_USER>(
 );
 PluginLogger.log("Loaded USRBG Database.");
 
-export const SettingValues = await settings.init("Tharki.ReUSRBG", defaultSettings);
+export const SettingValues = await settings.init("dev.tharki.ReUSRBG", defaultSettings);
 
 import { applyInjections } from "./patches/index";
 
