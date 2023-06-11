@@ -131,6 +131,42 @@ export interface InviteActions {
   transitionToInviteChannelSync: DefaultTypes.AnyFunction;
   transitionToInviteSync: DefaultTypes.AnyFunction;
 }
+export interface IconClasses {
+  actionIcon: string;
+  alwaysShown: string;
+  channelInfo: string;
+  containerDefault: string;
+  containerDragAfter: string;
+  containerDragBefore: string;
+  containerUserOver: string;
+  disableClick: string;
+  disabled: string;
+  iconBase: string;
+  iconItem: string;
+  iconLive: string;
+  iconVisibility: string;
+  openChatIconItem: string;
+  selected: string;
+  subtitleHasThreads: string;
+  summary: string;
+}
+export interface AvatarClasses {
+  avatarDecorationHint: string;
+  avatarHint: string;
+  avatarHintInner: string;
+  avatarHoverTarget: string;
+  avatarPositionNormal: string;
+  avatarPositionPanel: string;
+  avatarPositionPomelo: string;
+  avatarPositionPremiumBanner: string;
+  avatarPositionPremiumNoBanner: string;
+  avatarWrapper: string;
+  avatarWrapperNonUserBot: string;
+  avatarWrapperNormal: string;
+  clickable: string;
+  profileBadges: string;
+  warningCircleIcon: string;
+}
 export interface GenericModule {
   [key: string | number]: DefaultTypes.AnyFunction;
 }

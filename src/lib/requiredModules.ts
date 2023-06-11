@@ -1,16 +1,19 @@
 import { webpack } from "replugged";
 import * as Types from "../types";
-export const IconClasses = webpack.getByProps("iconItem");
-export const InviteActions = webpack.getByProps(
+export const IconClasses = webpack.getByProps<Types.IconClasses>("iconItem");
+export const InviteActions = webpack.getByProps<Types.InviteActions>(
   "acceptInviteAndTransitionToInviteChannel",
-) as unknown as Types.InviteActions;
+);
 
-export const AvatarClasses = webpack.getByProps("avatarWrapperNormal");
+export const AvatarClasses = webpack.getByProps<Types.AvatarClasses>("avatarWrapperNormal");
 
-export const UserAvatarParent = webpack.getBySource(
+export const UserAvatarParent = webpack.getBySource<Types.GenericModule>(
   /\.displayProfile.*\.avatarSrc/,
-) as unknown as Types.GenericModule;
+);
 
-export const { exports: UserBannerParent } = webpack.getBySource(/\.displayProfile.*\.bannerSrc/, {
-  raw: true,
-}) as Types.GenericExport;
+export const { exports: UserBannerParent } = webpack.getBySource<Types.GenericExport>(
+  /\.displayProfile.*\.bannerSrc/,
+  {
+    raw: true,
+  },
+);

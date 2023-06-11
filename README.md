@@ -8,7 +8,7 @@ Direct Download Link: [dev.tharki.ReUSRBG.asar](https://github.com/Tharki-God/Re
 
 Install Link:
 
-[![Install in Replugged](https://img.shields.io/badge/-Install%20in%20Replugged-blue?style=for-the-badge&logo=none)](https://replugged.dev/install?identifier=Tharki-God/ReUSRBG&source=github)
+[![Install in Replugged](https://img.shields.io/badge/-Install%20in%20Replugged-blue?style=for-the-badge&logo=none)](https://replugged.dev/install?identifier=dev.tharki.ReUSRBG)
 
 ![image](https://tharki-god.github.io/files-random-host/bdpluginsassets/usrbg.png)
 
