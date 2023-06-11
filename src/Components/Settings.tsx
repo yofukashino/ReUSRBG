@@ -11,13 +11,13 @@ export const registerSettings = (): void => {
     SettingValues.set(key as keyof Types.Settings, defaultSettings[key]);
   }
 };
-export const resetDatabase = async (): Promise<void> => {
+export const reloadDatabase = async (): Promise<void> => {
   USRDB.clear();
   const USRBG_RESPONSE = await fetch(USRBG_URL);
   const USRBG_JSON = await USRBG_RESPONSE.json();
   for (const USRBG_ITEM of USRBG_JSON) USRDB.set(USRBG_ITEM.uid, USRBG_ITEM);
-  PluginLogger.log("Reseted USRBG Database.");
-  Toasts.toast("Reseted USRBG Database.", Toasts.Kind.SUCCESS);
+  PluginLogger.log("Reloaded USRBG Database.");
+  Toasts.toast("Reloaded USRBG Database.", Toasts.Kind.SUCCESS);
 };
 export const Settings = (): Types.ReactElement => {
   return (
@@ -29,12 +29,12 @@ export const Settings = (): Types.ReactElement => {
       </SwitchItem>
       <ButtonItem
         {...{
-          button: "Reset Settings",
+          button: "Reload Database",
           onClick: () => {
-            resetDatabase();
+            reloadDatabase();
           },
         }}>
-        Press In-Case setting Crash or You want to reset settings to default.
+        Reload USRBG database without restarting discord.
       </ButtonItem>
     </div>
   );
