@@ -17,3 +17,8 @@ export const { exports: UserBannerParent } = webpack.getBySource<Types.GenericEx
     raw: true,
   },
 );
+
+export const { exports: UserBannerConstructor } = webpack.getBySource<Types.GenericExport>(
+  ".src).concat",
+  { raw: true },
+);

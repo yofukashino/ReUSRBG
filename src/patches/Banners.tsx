@@ -1,16 +1,16 @@
 import { webpack } from "replugged";
 import { PluginInjector, SettingValues, USRDB } from "../index";
 import { defaultSettings, displayProfileGetterList } from "../lib/consts";
-import { UserBannerParent } from "../lib/requiredModules";
+import { UserBannerConstructor, UserBannerParent } from "../lib/requiredModules";
 import USRBGIcon from "../Components/USRBGIcon";
 import * as Types from "../types";
 
 export const patchBanners = (): void => {
-  const funtionKey = webpack.getFunctionKeyBySource(
+  const parentFuntionKey = webpack.getFunctionKeyBySource<string>(
     UserBannerParent,
     /\.displayProfile.*\.bannerSrc/,
-  ) as unknown as string;
-  PluginInjector.before(UserBannerParent, funtionKey, (args: [Types.UserBannerArgs]) => {
+  );
+  PluginInjector.before(UserBannerParent, parentFuntionKey, (args: [Types.UserBannerArgs]) => {
     const [UserBannerArgs] = args;
     if (
       !USRDB.has(UserBannerArgs.user.id) ||
@@ -39,7 +39,7 @@ export const patchBanners = (): void => {
 
   PluginInjector.after(
     UserBannerParent,
-    funtionKey,
+    parentFuntionKey,
     (args: [Types.UserBannerArgs], res: Types.ReactElement) => {
       const [UserBannerArgs] = args;
       if (
@@ -51,6 +51,28 @@ export const patchBanners = (): void => {
       res.props.hasBannerImage = true;
       res.props.isPremium = true;
       res.props.children.props.children = [<USRBGIcon />];
+      return res;
+    },
+  );
+
+  const constructorFuntionKey = webpack.getFunctionKeyBySource<string>(
+    UserBannerConstructor,
+    ".overrideAvatarDecorationURL",
+  );
+
+  PluginInjector.after(
+    UserBannerConstructor,
+    constructorFuntionKey,
+    ([UserBannerArgs]: [Types.UserBannerArgs], res: Types.ReactElement) => {
+      if (
+        UserBannerArgs.profileType !== "SETTINGS" ||
+        !UserBannerArgs.hasBanner ||
+        !SettingValues.get("settingsBanner", defaultSettings.settingsBanner)
+      )
+        return res;
+      res.props.className = `${res.props.className} usrbg`;
+      res.props.viewBox = "0 0 660 233";
+      res.props.style.minHeight = 233;
       return res;
     },
   );

@@ -12,4 +12,5 @@ export const displayProfileGetterList = [
 ];
 export const defaultSettings = {
   nitroBanner: true,
+  settingsBanner: true,
 };

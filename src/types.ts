@@ -1,38 +1,8 @@
 import { types as DefaultTypes } from "replugged";
 export { types as DefaultTypes } from "replugged";
 export { ReactElement, ComponentClass } from "react";
+import { User } from "discord-types/general";
 
-export interface User {
-  avatar: string;
-  avatarDecoration: undefined | string;
-  bot: boolean;
-  desktop: boolean;
-  discriminator: string;
-  email: null | string;
-  flags: number;
-  guildMemberAvatars: {
-    [key: number]: string;
-  };
-  hasBouncedEmail: boolean;
-  hasFlag: DefaultTypes.AnyFunction;
-  id: string;
-  isStaff: DefaultTypes.AnyFunction;
-  isStaffPersonal: DefaultTypes.AnyFunction;
-  mfaEnabled: boolean;
-  mobile: boolean;
-  nsfwAllowed: undefined | boolean;
-  personalConnectionId: null | string;
-  phone: null | string;
-  premiumType: undefined | number;
-  premiumUsageFlags: number;
-  publicFlags: number;
-  purchasedFlags: number;
-  system: boolean;
-  username: string;
-  verified: boolean;
-  createdAt: Date;
-  tag: string;
-}
 export interface guildMemberProfile {
   accentColor: undefined | number;
   banner: undefined | string;
@@ -87,11 +57,12 @@ export interface displayProfile {
 }
 export interface UserBannerArgs {
   bannerSrc?: string;
+  hasBanner: boolean;
   displayProfile: displayProfile;
   guildId: undefined | string;
   isHovering: boolean;
   onClose: DefaultTypes.AnyFunction;
-  profileType: number;
+  profileType: string;
   showPremiumBadgeUpsell: boolean;
   user: User;
 }
@@ -167,12 +138,11 @@ export interface AvatarClasses {
   profileBadges: string;
   warningCircleIcon: string;
 }
-export interface GenericModule {
-  [key: string | number]: DefaultTypes.AnyFunction;
-}
+export interface GenericModule extends Record<string, DefaultTypes.AnyFunction> {}
 export interface GenericExport {
   exports: GenericModule;
 }
 export interface Settings {
   nitroBanner: boolean;
+  settingsBanner: boolean;
 }

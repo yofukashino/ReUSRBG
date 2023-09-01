@@ -27,6 +27,11 @@ export const Settings = (): Types.ReactElement => {
         {...util.useSetting(SettingValues, "nitroBanner", defaultSettings.nitroBanner)}>
         Prioritize Nitro banner
       </SwitchItem>
+      <SwitchItem
+        note="Show full height banner in settings acccounts page."
+        {...util.useSetting(SettingValues, "settingsBanner", defaultSettings.settingsBanner)}>
+        Show Full Banner
+      </SwitchItem>
       <ButtonItem
         {...{
           button: "Reload Database",
