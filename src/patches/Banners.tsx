@@ -71,8 +71,7 @@ export const patchBanners = (): void => {
       )
         return res;
       res.props.className = `${res.props.className} usrbg`;
-      res.props.viewBox = "0 0 660 233";
-      res.props.style.minHeight = 233;
+      res.props.viewBox = "0 0 660 233";      
       return res;
     },
   );
