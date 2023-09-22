@@ -8,7 +8,7 @@ import * as Types from "../types";
 export const patchAvatars = (): void => {
   const funtionKey = webpack.getFunctionKeyBySource(
     UserAvatarParent,
-    /\.user.*\.displayProfile.*\.isHovering/,
+    ".profileEffectID",
   ) as unknown as string;
   PluginInjector.before(UserAvatarParent, funtionKey, (args: [Types.UserAvatarArgs]) => {
     const [UserAvatarArgs] = args;
