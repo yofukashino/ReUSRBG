@@ -1,8 +1,8 @@
-import { components, common } from "replugged";
+import { common, components } from "replugged";
 import { IconClasses, InviteActions } from "../lib/requiredModules";
-import { USBBG_SERVER_INVITE_CODE, USBBG_SERVER_ID } from "../lib/consts";
-const { Tooltip, FormText } = components;
-const { modal: ModalUtils, guilds: UltimateGuildStore } = common;
+import { USBBG_SERVER_ID, USBBG_SERVER_INVITE_CODE } from "../lib/consts";
+const { Tooltip } = components;
+const { modal: ModalUtils, guilds: UltimateGuildStore, parser: Parser } = common;
 export default () => (
   <Tooltip
     {...{
@@ -16,25 +16,17 @@ export default () => (
     }}>
     <div
       {...{
-        onClick: async () => {
+        onClick: async (): Promise<void> => {
           if (UltimateGuildStore.getGuild(USBBG_SERVER_ID)) {
-            return InviteActions.acceptInviteAndTransitionToInviteChannel({
+            InviteActions.acceptInviteAndTransitionToInviteChannel({
               inviteKey: USBBG_SERVER_INVITE_CODE,
-            });
+            }) as void;
+            return;
           }
           await ModalUtils.confirm({
             title: "Hold Up, Wait a min.",
-            body: (
-              <FormText.DESCRIPTION>
-                {[
-                  "You can join the Black Box server to get your own USRBG banner.\n",
-                  "Press ",
-                  <b>Join</b>,
-                  " To join the server and ",
-                  <b>Go back</b>,
-                  " to close the modal.",
-                ]}
-              </FormText.DESCRIPTION>
+            body: Parser.parse(
+              "You can join the Black Box server to get your own USRBG banner.\nPress **Join** to join the server and **Go back** to close the modal.",
             ),
             confirmText: "Join",
             cancelText: "Go back",

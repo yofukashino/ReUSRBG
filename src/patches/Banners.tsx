@@ -1,6 +1,6 @@
 import { webpack } from "replugged";
 import { PluginInjector, SettingValues, USRDB } from "../index";
-import { defaultSettings, displayProfileGetterList } from "../lib/consts";
+import { defaultSettings } from "../lib/consts";
 import { UserBannerConstructor, UserBannerParent } from "../lib/requiredModules";
 import USRBGIcon from "../Components/USRBGIcon";
 import * as Types from "../types";
@@ -21,12 +21,14 @@ export const patchBanners = (): void => {
     const { img } = USRDB.get(UserBannerArgs.user.id);
     UserBannerArgs.bannerSrc = img;
     if (!UserBannerArgs.displayProfile) return args;
-    const originalGetterProperties = Object.fromEntries(
-      displayProfileGetterList.map((key) => [key, UserBannerArgs.displayProfile[key]]),
+    const originalPremiumProps = Object.fromEntries(
+      Object.getOwnPropertyNames(Object.getPrototypeOf(UserBannerArgs.displayProfile))
+        .filter((key) => typeof UserBannerArgs.displayProfile[key] !== "function")
+        .map((key) => [key, UserBannerArgs.displayProfile[key]]),
     );
-    for (const key in originalGetterProperties)
+    for (const key in originalPremiumProps)
       Object.defineProperty(UserBannerArgs.displayProfile, key, {
-        get: () => originalGetterProperties[key],
+        get: () => originalPremiumProps[key],
         configurable: true,
       });
     Object.defineProperty(UserBannerArgs.displayProfile, "premiumType", {

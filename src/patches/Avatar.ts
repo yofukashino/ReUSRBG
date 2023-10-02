@@ -20,7 +20,10 @@ export const patchAvatars = (): void => {
       return args;
     const { img } = USRDB.get(UserAvatarArgs.user.id);
     if (!UserAvatarArgs.displayProfile) return args;
-    UserAvatarArgs.displayProfile.banner = img;
+    Object.defineProperty(UserAvatarArgs.displayProfile, "banner", {
+      get: () => img,
+      configurable: true,
+    });
     return args;
   });
 };
