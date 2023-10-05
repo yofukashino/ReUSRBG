@@ -8,7 +8,7 @@ import * as Types from "../types";
 export const patchBanners = (): void => {
   const parentFuntionKey = webpack.getFunctionKeyBySource<string>(
     UserBannerParent,
-    ".Messages.CLYDE_SETTINGS",
+    ".Messages.EDIT_PROFILE",
   );
   PluginInjector.before(UserBannerParent, parentFuntionKey, (args: [Types.UserBannerArgs]) => {
     const [UserBannerArgs] = args;
@@ -59,7 +59,7 @@ export const patchBanners = (): void => {
 
   const constructorFuntionKey = webpack.getFunctionKeyBySource<string>(
     UserBannerConstructor,
-    ".overrideAvatarDecoration",
+    "().bannerSVGWrapper",
   );
 
   PluginInjector.after(

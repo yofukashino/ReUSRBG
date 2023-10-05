@@ -10,13 +10,13 @@ export const AvatarClasses = webpack.getByProps<Types.AvatarClasses>("avatarWrap
 export const UserAvatarParent = webpack.getBySource<Types.GenericModule>(".avatarDecorationHint:");
 
 export const { exports: UserBannerParent } = webpack.getBySource<Types.GenericExport>(
-  ".Messages.CLYDE_SETTINGS",
+  ".Messages.EDIT_PROFILE",
   {
     raw: true,
   },
 );
 
 export const { exports: UserBannerConstructor } = webpack.getBySource<Types.GenericExport>(
-  ".src).concat",
+  "().bannerSVGWrapper",
   { raw: true },
 );
