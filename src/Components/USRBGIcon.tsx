@@ -1,8 +1,11 @@
-import { common, components } from "replugged";
+import {
+  modal as ModalUtils,
+  parser as Parser,
+  guilds as UltimateGuildStore,
+} from "replugged/common";
+import { Tooltip } from "replugged/components";
 import { IconClasses, InviteActions } from "../lib/requiredModules";
 import { USBBG_SERVER_ID, USBBG_SERVER_INVITE_CODE } from "../lib/consts";
-const { Tooltip } = components;
-const { modal: ModalUtils, guilds: UltimateGuildStore, parser: Parser } = common;
 export default () => (
   <Tooltip
     {...{

@@ -1,8 +1,8 @@
-import { common, components, util } from "replugged";
+import { util } from "replugged";
+import { toast as Toasts } from "replugged/common";
+import { ButtonItem, SwitchItem } from "replugged/components";
 import { PluginLogger, SettingValues, USRDB } from "../index";
 import * as Types from "../types";
-const { toast: Toasts } = common;
-const { ButtonItem, SwitchItem } = components;
 import { USRBG_URL, defaultSettings } from "../lib/consts";
 export const registerSettings = (): void => {
   for (const key in defaultSettings) {

@@ -1,16 +1,11 @@
-import { webpack } from "replugged";
 import { PluginInjector, SettingValues, USRDB } from "../index";
 import { defaultSettings } from "../lib/consts";
 import { UserAvatarParent } from "../lib/requiredModules";
 
 import * as Types from "../types";
 
-export const patchAvatars = (): void => {
-  const funtionKey = webpack.getFunctionKeyBySource(
-    UserAvatarParent,
-    ".profileEffectID",
-  ) as unknown as string;
-  PluginInjector.before(UserAvatarParent, funtionKey, (args: [Types.UserAvatarArgs]) => {
+export default (): void => {
+  PluginInjector.before(UserAvatarParent, "default", (args: [Types.UserAvatarArgs]) => {
     const [UserAvatarArgs] = args;
     if (
       !USRDB.has(UserAvatarArgs.user.id) ||

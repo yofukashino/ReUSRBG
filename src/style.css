@@ -1,4 +1,4 @@
-.banner-1YaD3N>.usr-bg-icon-clickable {
+[class^=banner]>.usr-bg-icon-clickable {
   opacity: 0% !important;
   border-radius: 50px;
   background-color: rgba(10, 10, 10, 0.375);
@@ -10,23 +10,23 @@
   transition: all 0.2s ease-in-out;
 }
 
-.banner-1YaD3N:hover>.usr-bg-icon-clickable {
+[class^=banner]:hover>.usr-bg-icon-clickable {
   opacity: 100% !important;
 }
 
-[class*="bannerSVGWrapper-"].usrbg {
+[class*="bannerSVGWrapper"].usrbg {
   min-height: 233px !important;
 }
 
-[class*="bannerSVGWrapper-"].usrbg mask circle {
+[class*="bannerSVGWrapper"].usrbg mask circle {
   cy: 253 !important;
 }
 
-[class*="bannerSVGWrapper-"].usrbg [class*="settingsBanner-"] {
+[class*="bannerSVGWrapper"].usrbg [class*="settingsBanner"] {
   height: 223px !important;
   min-height: 223px !important;
 }
 
-[class*="bannerSVGWrapper-"].usrbg+div [class*="avatar-"] {
+[class*="bannerSVGWrapper"].usrbg+div [class*="avatar"] {
   top: 213px !important;
 }

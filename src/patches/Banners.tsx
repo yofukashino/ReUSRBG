@@ -1,16 +1,11 @@
-import { webpack } from "replugged";
 import { PluginInjector, SettingValues, USRDB } from "../index";
 import { defaultSettings } from "../lib/consts";
 import { UserBannerConstructor, UserBannerParent } from "../lib/requiredModules";
 import USRBGIcon from "../Components/USRBGIcon";
 import * as Types from "../types";
 
-export const patchBanners = (): void => {
-  const parentFuntionKey = webpack.getFunctionKeyBySource<string>(
-    UserBannerParent,
-    ".Messages.EDIT_PROFILE",
-  );
-  PluginInjector.before(UserBannerParent, parentFuntionKey, (args: [Types.UserBannerArgs]) => {
+export default (): void => {
+  PluginInjector.before(UserBannerParent, "default", (args: [Types.UserBannerArgs]) => {
     const [UserBannerArgs] = args;
     if (
       !USRDB.has(UserBannerArgs.user.id) ||
@@ -41,7 +36,7 @@ export const patchBanners = (): void => {
 
   PluginInjector.after(
     UserBannerParent,
-    parentFuntionKey,
+    "default",
     (args: [Types.UserBannerArgs], res: Types.ReactElement) => {
       const [UserBannerArgs] = args;
       if (
@@ -57,14 +52,9 @@ export const patchBanners = (): void => {
     },
   );
 
-  const constructorFuntionKey = webpack.getFunctionKeyBySource<string>(
-    UserBannerConstructor,
-    "().bannerSVGWrapper",
-  );
-
   PluginInjector.after(
     UserBannerConstructor,
-    constructorFuntionKey,
+    "default",
     ([UserBannerArgs]: [Types.UserBannerArgs], res: Types.ReactElement) => {
       if (
         UserBannerArgs.profileType !== "SETTINGS" ||
