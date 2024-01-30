@@ -6,3 +6,5 @@ export const defaultSettings = {
   nitroBanner: true,
   settingsBanner: true,
 };
+
+export default { USBBG_SERVER_INVITE_CODE, USBBG_SERVER_ID, USRBG_URL, defaultSettings };

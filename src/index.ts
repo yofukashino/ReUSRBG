@@ -1,27 +1,26 @@
 import { Injector, Logger, settings } from "replugged";
-import { USRBG_URL, defaultSettings } from "./lib/consts";
-import { registerSettings } from "./Components/Settings";
+import Consts from "./lib/consts";
+import Settings from "./Components/Settings";
+import Types from "./types";
 import "./style.css";
-import * as Types from "./types";
-
 export const PluginInjector = new Injector();
 
 export const PluginLogger = Logger.plugin("ReUSRBG");
 
-const USRBG_RESPONSE = await fetch(USRBG_URL);
+const USRBG_RESPONSE = await fetch(Consts.USRBG_URL);
 const USRBG_JSON = await USRBG_RESPONSE.json();
 export const USRDB = new Map<string, Types.USRBD_USER>(
   USRBG_JSON.map((user: Types.USRBD_USER) => [user.uid, user]),
 );
 PluginLogger.log("Loaded USRBG Database.");
 
-export const SettingValues = await settings.init("dev.tharki.ReUSRBG", defaultSettings);
+export const SettingValues = await settings.init("dev.tharki.ReUSRBG", Consts.defaultSettings);
 
-import { applyInjections } from "./patches/index";
+import Injections from "./patches/index";
 
 export const start = (): void => {
-  registerSettings();
-  applyInjections();
+  Settings.registerSettings();
+  Injections.applyInjections();
 };
 
 export const stop = (): void => {

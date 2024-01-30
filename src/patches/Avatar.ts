@@ -1,8 +1,8 @@
 import { PluginInjector, SettingValues, USRDB } from "../index";
-import { defaultSettings } from "../lib/consts";
+import Consts from "../lib/consts";
 import { UserAvatarParent } from "../lib/requiredModules";
 
-import * as Types from "../types";
+import Types from "../types";
 
 export default (): void => {
   PluginInjector.before(UserAvatarParent, "default", (args: [Types.UserAvatarArgs]) => {
@@ -10,7 +10,7 @@ export default (): void => {
     if (
       !USRDB.has(UserAvatarArgs.user.id) ||
       (UserAvatarArgs?.user?.premiumType &&
-        SettingValues.get("nitroBanner", defaultSettings.nitroBanner))
+        SettingValues.get("nitroBanner", Consts.defaultSettings.nitroBanner))
     )
       return args;
     const { img } = USRDB.get(UserAvatarArgs.user.id);

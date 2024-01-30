@@ -1,5 +1,5 @@
 import { webpack } from "replugged";
-import * as Types from "../types";
+import Types from "../types";
 export const IconClasses = webpack.getByProps<Types.IconClasses>("iconItem");
 export const InviteActions = webpack.getByProps<Types.InviteActions>(
   "acceptInviteAndTransitionToInviteChannel",

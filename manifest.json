@@ -3,11 +3,11 @@
   "name": "ReUSRBG",
   "description": "User profile backgrounds for Replugged. (Banners are fetched from the USRBG database.)",
   "image": "https://i.imgur.com/dAd2DmA.png",
-  "source": "https://github.com/Tharki-God/ReUSRBG/",
+  "source": "https://github.com/TharkiDev/ReUSRBG/",
   "author": {
     "name": "Ahlawat",
-    "discordID": "1025214794766221384",
-    "github": "Tharki-God"
+    "discordID": "1121961711080050780",
+    "github": "TharkiDev"
   },
   "version": "1.4.3",
   "updater": {

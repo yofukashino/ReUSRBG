@@ -4,3 +4,5 @@ export const applyInjections = (): void => {
   patchAvatars();
   patchBanners();
 };
+
+export default { applyInjections };
