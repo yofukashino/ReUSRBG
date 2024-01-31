@@ -5,7 +5,7 @@ import Types from "./types";
 import "./style.css";
 export const PluginInjector = new Injector();
 
-export const PluginLogger = Logger.plugin("ReUSRBG");
+export const PluginLogger = Logger.plugin("ReUSRBG", "#b380ff");
 
 const USRBG_RESPONSE = await fetch(Consts.USRBG_URL);
 const USRBG_JSON = await USRBG_RESPONSE.json();
