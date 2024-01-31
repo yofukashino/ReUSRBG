@@ -49,7 +49,7 @@ export default (): void => {
       res.props.isPremium = true;
       res.props.children.props.children = res.props.children.props.children
         .filter(Boolean)
-        .filter((c) => !c?.type?.toString?.()?.includes?.("pencil"));
+        .filter((c) => !c?.props?.children?.toString?.()?.includes?.("pencil"));
       res.props.children.props.children.unshift(<USRBGIcon />);
       return res;
     },
