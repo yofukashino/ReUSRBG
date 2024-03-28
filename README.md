@@ -2,7 +2,7 @@
 
 A plugin to get UserBG banners on desktop with Replugged.
 
-This will be kept maintained as long as I am alive and .
+This will be kept maintained as long as I am alive and in pieces.
 
 
 Direct Download Link: 
