@@ -5,7 +5,7 @@ import {
 } from "replugged/common";
 import { Tooltip } from "replugged/components";
 import { IconClasses, InviteActions } from "../lib/requiredModules";
-import Consts from "../lib/consts";
+import { USBBG_SERVER_ID, USBBG_SERVER_INVITE_CODE } from "../lib/consts";
 export default () => (
   <Tooltip
     text="USRBG Banner"
@@ -17,9 +17,9 @@ export default () => (
     }}>
     <div
       onClick={async (): Promise<void> => {
-        if (UltimateGuildStore.getGuild(Consts.USBBG_SERVER_ID)) {
+        if (UltimateGuildStore.getGuild(USBBG_SERVER_ID)) {
           InviteActions.acceptInviteAndTransitionToInviteChannel({
-            inviteKey: Consts.USBBG_SERVER_INVITE_CODE,
+            inviteKey: USBBG_SERVER_INVITE_CODE,
           }) as void;
           return;
         }
@@ -32,7 +32,7 @@ export default () => (
           cancelText: "Go back",
           onConfirm: () =>
             InviteActions.acceptInviteAndTransitionToInviteChannel({
-              inviteKey: Consts.USBBG_SERVER_INVITE_CODE,
+              inviteKey: USBBG_SERVER_INVITE_CODE,
             }),
         });
       }}>

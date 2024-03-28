@@ -3,11 +3,11 @@
   "name": "ReUSRBG",
   "description": "User profile backgrounds for Replugged. (Banners are fetched from the USRBG database.)",
   "image": "https://i.imgur.com/dAd2DmA.png",
-  "source": "https://github.com/TharkiDev/ReUSRBG/",
+  "source": "https://github.com/YofukashiNo/ReUSRBG/",
   "author": {
-    "name": "Ahlawat",
+    "name": "Nanakusa",
     "discordID": "1121961711080050780",
-    "github": "TharkiDev"
+    "github": "YofukashiNo"
   },
   "version": "1.4.6",
   "updater": {

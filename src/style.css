@@ -1,4 +1,4 @@
-[class^=banner]>.usr-bg-icon-clickable {
+[class^="banner"] > .usr-bg-icon-clickable {
   opacity: 0% !important;
   border-radius: 50px;
   background-color: rgba(10, 10, 10, 0.375);
@@ -10,7 +10,7 @@
   transition: all 0.2s ease-in-out;
 }
 
-[class^=banner]:hover>.usr-bg-icon-clickable {
+[class^="banner"]:hover > .usr-bg-icon-clickable {
   opacity: 100% !important;
 }
 
@@ -27,6 +27,6 @@
   min-height: 223px !important;
 }
 
-[class*="bannerSVGWrapper"].usrbg+div [class*="avatar"] {
+[class*="bannerSVGWrapper"].usrbg + div [class*="avatar"] {
   top: 213px !important;
 }

@@ -1,5 +1,5 @@
 import { PluginInjector, SettingValues, USRDB } from "../index";
-import Consts from "../lib/consts";
+import { defaultSettings } from "../lib/consts";
 import { UserBannerConstructor, UserBannerParent } from "../lib/requiredModules";
 import USRBGIcon from "../Components/USRBGIcon";
 import Types from "../types";
@@ -10,7 +10,7 @@ export default (): void => {
     if (
       !USRDB.has(UserBannerArgs.user.id) ||
       (UserBannerArgs?.displayProfile?._userProfile?.banner &&
-        SettingValues.get("nitroBanner", Consts.defaultSettings.nitroBanner))
+        SettingValues.get("nitroBanner", defaultSettings.nitroBanner))
     )
       return args;
     const { img } = USRDB.get(UserBannerArgs.user.id);
@@ -31,6 +31,7 @@ export default (): void => {
       configurable: true,
     });
     UserBannerArgs.displayProfile.getBannerURL = () => img;
+
     return args;
   });
 
@@ -41,15 +42,21 @@ export default (): void => {
       const [UserBannerArgs] = args;
       if (
         !USRDB.has(UserBannerArgs.user.id) ||
-        (UserBannerArgs?.displayProfile?._userProfile?.banner &&
-          SettingValues.get("nitroBanner", Consts.defaultSettings.nitroBanner))
+        (UserBannerArgs?.user?.banner &&
+          SettingValues.get("nitroBanner", defaultSettings.nitroBanner))
       )
         return res;
       res.props.hasBannerImage = true;
       res.props.isPremium = true;
       res.props.children.props.children = res.props.children.props.children
         .filter(Boolean)
-        .filter((c) => !c?.props?.children?.toString?.()?.includes?.("pencil"));
+        .filter(
+          (c) =>
+            !c?.type?.toString?.()?.includes?.("pencil") &&
+            !c?.type?.toString?.()?.includes?.("NITRO_BADGE") &&
+            !c?.props?.children?.toString?.()?.includes?.("pencil") &&
+            !c?.props?.children?.toString?.()?.includes?.("NITRO_BADGE"),
+        );
       res.props.children.props.children.unshift(<USRBGIcon />);
       return res;
     },
@@ -62,7 +69,7 @@ export default (): void => {
       if (
         UserBannerArgs.profileType !== "SETTINGS" ||
         !UserBannerArgs.hasBanner ||
-        !SettingValues.get("settingsBanner", Consts.defaultSettings.settingsBanner)
+        !SettingValues.get("settingsBanner", defaultSettings.settingsBanner)
       )
         return res;
       res.props.className = `${res.props.className} usrbg`;
