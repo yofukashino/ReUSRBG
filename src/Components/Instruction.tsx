@@ -12,7 +12,7 @@ export default () => (
     justify={Flex.Justify.START}
     style={{ gap: "8px", margin: "1%" }}>
     <Text.Normal>
-      <Flex direction={Flex.Direction.HORIZONTAL} align={Flex.Align.CENTER} style={{ gap: "4px" }}>
+      <Flex direction={Flex.Direction.HORIZONTAL} wrap={Flex.Wrap.WRAP} style={{ gap: "4px" }}>
         <b>🔹</b>
         <Clickable
           onClick={async () => {
@@ -51,15 +51,15 @@ export default () => (
       </b>
     </Text.Normal>
     <Text.Normal>
-      <Flex direction={Flex.Direction.HORIZONTAL} align={Flex.Align.CENTER} style={{ gap: "4px" }}>
+      <Flex direction={Flex.Direction.HORIZONTAL} wrap={Flex.Wrap.WRAP} style={{ gap: "4px" }}>
         <b>🔹</b> Wait for your background request to be approved in
         <Clickable
           onClick={() => {
             TransitionUtil.transitionTo(`/channels/449175561529589761/886288041612828702`);
           }}>
-          ⁠#userbg-log
+          #userbg-log ,
         </Clickable>
-        , take a bit of time.
+        it take a bit of time.
       </Flex>
     </Text.Normal>
     <Text.Normal>
