@@ -39,6 +39,19 @@ export namespace Types {
     themeColors: undefined | string;
     userId: string;
   }
+  export interface TransitionUtil {
+    back: DefaultTypes.AnyFunction;
+    forward: DefaultTypes.AnyFunction;
+    getFingerprintLocation: DefaultTypes.AnyFunction;
+    getHistory: DefaultTypes.AnyFunction;
+    getLastRouteChangeSource: DefaultTypes.AnyFunction;
+    getLastRouteChangeSourceLocationStack: DefaultTypes.AnyFunction;
+    hasNavigated: DefaultTypes.AnyFunction;
+    isValidFingerprintRoute: DefaultTypes.AnyFunction;
+    replaceWith: DefaultTypes.AnyFunction;
+    transitionTo: DefaultTypes.AnyFunction;
+    transitionToGuild: DefaultTypes.AnyFunction;
+  }
   export interface displayProfile {
     accentColor: number;
     banner: undefined | string;
@@ -92,6 +105,39 @@ export namespace Types {
     uid: string;
     _id: string;
   }
+  export type InviteComponent = React.ComponentType<{ code: string; author: User }>;
+  export interface Invite {
+    code: string;
+    guild?: {
+      banner: string;
+      description: string;
+      features: string[];
+      icon: string;
+      id: string;
+      name: string;
+      nsfw: false;
+      nsfw_level: number;
+      premium_subscription_count: number;
+      splash: string;
+      vanity_url_code: string;
+      verification_level: number;
+    };
+    inviter: {
+      accent_color?: string;
+      avatar?: string;
+      avatar_decoration_data?: Record<string, string>;
+      banner?: string;
+      banner_color?: string;
+      discriminator?: string;
+      flags?: string;
+      global_name?: string;
+      id?: string;
+      premium_type?: number;
+      public_flags?: number;
+      username?: string;
+    };
+    expires_at?: null | string;
+  }
   export interface InviteActions {
     acceptInvite: DefaultTypes.AnyFunction;
     acceptInviteAndTransitionToInviteChannel: DefaultTypes.AnyFunction;
@@ -102,7 +148,7 @@ export namespace Types {
     mobileCreateInvite: DefaultTypes.AnyFunction;
     openApp: DefaultTypes.AnyFunction;
     openNativeAppModal: DefaultTypes.AnyFunction;
-    resolveInvite: DefaultTypes.AnyFunction;
+    resolveInvite: (code: string) => { code: string; invite: Invite | null };
     revokeFriendInvites: DefaultTypes.AnyFunction;
     revokeInvite: DefaultTypes.AnyFunction;
     transitionToInvite: DefaultTypes.AnyFunction;

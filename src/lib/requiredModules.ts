@@ -23,3 +23,10 @@ export const { exports: UserBannerConstructor } = webpack.getBySource<Types.Gene
   ".bannerSVGWrapper",
   { raw: true },
 );
+
+export const TransitionUtil = webpack.getByProps<Types.TransitionUtil>(
+  "transitionTo",
+  "transitionToGuild",
+);
+
+export const Invite = webpack.getBySource<Types.InviteComponent>(".AnalyticsPages.INVITE_EMBED");

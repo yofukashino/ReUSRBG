@@ -1,8 +1,9 @@
 import { util } from "replugged";
 import { toast as Toasts } from "replugged/common";
-import { Button, ButtonItem, SwitchItem } from "replugged/components";
+import { ButtonItem, FormNotice, SwitchItem } from "replugged/components";
 import { PluginLogger, SettingValues, USRDB } from "../index";
 import { defaultSettings } from "../lib/consts";
+import Instruction from "./Instruction";
 import Utils from "../lib/utils";
 import Types from "../types";
 
@@ -38,6 +39,18 @@ export const Settings = (): React.ReactElement => {
         }}>
         Reload USRBG database without restarting discord.
       </ButtonItem>
+      <FormNotice
+        title="⋆｡ ﾟ☁︎｡ ⋆｡ ﾟ☾ ﾟ｡ ⋆ How to request your own USRBG banner"
+        body={<Instruction />}
+        className="usrbg-instructions"
+        iconClassName="usrbg-instructions-image"
+        imageData={{
+          height: 102,
+          width: 102,
+          position: "right",
+          src: "https://i.imgur.com/nDtUcX5.gif",
+        }}
+        type={FormNotice.Types.CUSTOM}></FormNotice>
     </div>
   );
 };
