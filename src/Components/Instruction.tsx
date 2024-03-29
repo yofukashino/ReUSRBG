@@ -1,11 +1,12 @@
 import {
   fluxDispatcher as FluxDispatcher,
   toast as Toasts,
+  guilds as UltimateGuildStore,
   users as UltimateUserStore,
 } from "replugged/common";
 import { Clickable, Flex, Text } from "replugged/components";
 import { Invite, InviteActions, TransitionUtil } from "../lib/requiredModules";
-import { USBBG_SERVER_INVITE_CODE } from "../lib/consts";
+import { USBBG_SERVER_ID, USBBG_SERVER_INVITE_CODE } from "../lib/consts";
 export default () => (
   <Flex
     direction={Flex.Direction.VERTICAL}
@@ -16,11 +17,17 @@ export default () => (
         <b>🔹</b>
         <Clickable
           onClick={async () => {
+            if (UltimateGuildStore.getGuild(USBBG_SERVER_ID)) {
+              FluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
+              TransitionUtil.transitionTo(`/channels/449175561529589761/886287835018178560`);
+              return;
+            }
             const inviteInfo = await InviteActions.resolveInvite(USBBG_SERVER_INVITE_CODE);
             if (inviteInfo.invite == null) {
               Toasts.toast("Error Resolving Invite, Try Different Invite.", Toasts.Kind.FAILURE);
               return;
             }
+            FluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
             FluxDispatcher.dispatch({
               type: "INVITE_MODAL_OPEN",
               ...inviteInfo,
@@ -31,6 +38,7 @@ export default () => (
         and go to
         <Clickable
           onClick={() => {
+            FluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
             TransitionUtil.transitionTo(`/channels/449175561529589761/886287835018178560`);
           }}>
           #background-request
@@ -55,6 +63,7 @@ export default () => (
         <b>🔹</b> Wait for your background request to be approved in
         <Clickable
           onClick={() => {
+            FluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
             TransitionUtil.transitionTo(`/channels/449175561529589761/886288041612828702`);
           }}>
           #userbg-log ,

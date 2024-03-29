@@ -1,10 +1,10 @@
 import {
-  modal as ModalUtils,
-  parser as Parser,
+  fluxDispatcher as FluxDispatcher,
+  toast as Toasts,
   guilds as UltimateGuildStore,
 } from "replugged/common";
 import { Tooltip } from "replugged/components";
-import { IconClasses, InviteActions } from "../lib/requiredModules";
+import { IconClasses, InviteActions, TransitionUtil } from "../lib/requiredModules";
 import { USBBG_SERVER_ID, USBBG_SERVER_INVITE_CODE } from "../lib/consts";
 export default () => (
   <Tooltip
@@ -18,22 +18,19 @@ export default () => (
     <div
       onClick={async (): Promise<void> => {
         if (UltimateGuildStore.getGuild(USBBG_SERVER_ID)) {
-          InviteActions.acceptInviteAndTransitionToInviteChannel({
-            inviteKey: USBBG_SERVER_INVITE_CODE,
-          }) as void;
+          FluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
+          TransitionUtil.transitionTo(`/channels/449175561529589761/886287835018178560`);
           return;
         }
-        await ModalUtils.confirm({
-          title: "Hold Up, Wait a min.",
-          body: Parser.parse(
-            "You can join the Black Box server to get your own USRBG banner.\nPress **Join** to join the server and **Go back** to close the modal.",
-          ),
-          confirmText: "Join",
-          cancelText: "Go back",
-          onConfirm: () =>
-            InviteActions.acceptInviteAndTransitionToInviteChannel({
-              inviteKey: USBBG_SERVER_INVITE_CODE,
-            }),
+        const inviteInfo = await InviteActions.resolveInvite(USBBG_SERVER_INVITE_CODE);
+        if (inviteInfo.invite == null) {
+          Toasts.toast("Error Resolving Invite, Try Different Invite.", Toasts.Kind.FAILURE);
+          return;
+        }
+        FluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
+        FluxDispatcher.dispatch({
+          type: "INVITE_MODAL_OPEN",
+          ...inviteInfo,
         });
       }}>
       <svg
