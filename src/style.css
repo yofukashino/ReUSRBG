@@ -27,7 +27,7 @@
   min-height: 223px !important;
 }
 
-[class*="bannerSVGWrapper"].usrbg + div [class*="avatar"] {
+[class*="bannerSVGWrapper"].usrbg + div [class*="avatar_"] {
   top: 213px !important;
 }
 
