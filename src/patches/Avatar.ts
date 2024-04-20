@@ -1,10 +1,11 @@
 import { PluginInjector, SettingValues, USRDB } from "../index";
 import { defaultSettings } from "../lib/consts";
-import { UserAvatarParent } from "../lib/requiredModules";
+import Modules from "../lib/requiredModules";
 
 import Types from "../types";
 
 export default (): void => {
+  const { UserAvatarParent } = Modules;
   PluginInjector.before(UserAvatarParent, "default", (args: [Types.UserAvatarArgs]) => {
     const [UserAvatarArgs] = args;
     if (

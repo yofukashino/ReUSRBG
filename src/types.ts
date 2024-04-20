@@ -6,11 +6,7 @@ export namespace Types {
   export interface GenericExport {
     exports: GenericModule;
   }
-  export interface Settings {
-    nitroBanner: boolean;
-    settingsBanner: boolean;
-  }
-  export interface guildMemberProfile {
+  export interface GuildMemberProfile {
     accentColor: undefined | number;
     banner: undefined | string;
     bio: undefined | string;
@@ -21,7 +17,7 @@ export namespace Types {
     themeColors: undefined | string;
     userId: string;
   }
-  interface userProfile {
+  interface UserProfile {
     accentColor: undefined | number;
     application: null | string;
     applicationRoleConnections: [];
@@ -52,7 +48,7 @@ export namespace Types {
     transitionTo: DefaultTypes.AnyFunction;
     transitionToGuild: DefaultTypes.AnyFunction;
   }
-  export interface displayProfile {
+  export interface DisplayProfile {
     accentColor: number;
     banner: undefined | string;
     bio: string;
@@ -63,9 +59,9 @@ export namespace Types {
     pronouns: string;
     themeColors: undefined | string;
     userId: string;
-    _guildMemberProfile: null | guildMemberProfile;
+    _GuildMemberProfile: null | GuildMemberProfile;
     _profileThemesExperimentBucket: number;
-    _userProfile: userProfile;
+    _userProfile: UserProfile;
     application: null;
     canEditThemes: boolean;
     canUsePremiumProfileCustomization: boolean;
@@ -78,7 +74,7 @@ export namespace Types {
   export interface UserBannerArgs {
     bannerSrc?: string;
     hasBanner: boolean;
-    displayProfile: displayProfile;
+    displayProfile: DisplayProfile;
     guildId: undefined | string;
     isHovering: boolean;
     onClose: DefaultTypes.AnyFunction;
@@ -89,7 +85,7 @@ export namespace Types {
   export interface UserAvatarArgs {
     channelId: string;
     disableUserProfileLink: boolean;
-    displayProfile: displayProfile;
+    displayProfile: DisplayProfile;
     guildId: null | string;
     isHovering: boolean;
     isMobile: boolean;
@@ -190,6 +186,21 @@ export namespace Types {
     clickable: string;
     profileBadges: string;
     warningCircleIcon: string;
+  }
+  export interface Settings {
+    nitroBanner: boolean;
+    settingsBanner: boolean;
+  }
+  export interface Modules {
+    loadModules?: () => Promise<void>;
+    IconClasses?: IconClasses;
+    InviteActions?: InviteActions;
+    AvatarClasses?: AvatarClasses;
+    UserAvatarParent?: GenericModule;
+    UserBannerParent?: GenericModule;
+    UserBannerConstructor?: GenericModule;
+    TransitionUtil?: TransitionUtil;
+    Invite?: InviteComponent;
   }
 }
 export default Types;

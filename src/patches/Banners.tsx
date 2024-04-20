@@ -1,10 +1,11 @@
 import { PluginInjector, SettingValues, USRDB } from "../index";
 import { defaultSettings } from "../lib/consts";
-import { UserBannerConstructor, UserBannerParent } from "../lib/requiredModules";
+import Modules from "../lib/requiredModules";
 import USRBGIcon from "../Components/USRBGIcon";
 import Types from "../types";
 
 export default (): void => {
+  const { UserBannerConstructor, UserBannerParent } = Modules;
   PluginInjector.before(UserBannerParent, "default", (args: [Types.UserBannerArgs]) => {
     const [UserBannerArgs] = args;
     if (
@@ -34,12 +35,10 @@ export default (): void => {
 
     return args;
   });
-
   PluginInjector.after(
     UserBannerParent,
     "default",
-    (args: [Types.UserBannerArgs], res: React.ReactElement) => {
-      const [UserBannerArgs] = args;
+    ([UserBannerArgs]: [Types.UserBannerArgs], res: React.ReactElement) => {
       if (
         !USRDB.has(UserBannerArgs.user.id) ||
         (UserBannerArgs?.user?.banner &&

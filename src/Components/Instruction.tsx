@@ -5,8 +5,9 @@ import {
   users as UltimateUserStore,
 } from "replugged/common";
 import { Clickable, Flex, Text } from "replugged/components";
-import { Invite, InviteActions, TransitionUtil } from "../lib/requiredModules";
 import { USBBG_SERVER_ID, USBBG_SERVER_INVITE_CODE } from "../lib/consts";
+import Modules from "../lib/requiredModules";
+
 export default () => (
   <Flex
     direction={Flex.Direction.VERTICAL}
@@ -19,10 +20,12 @@ export default () => (
           onClick={async () => {
             if (UltimateGuildStore.getGuild(USBBG_SERVER_ID)) {
               FluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
-              TransitionUtil.transitionTo(`/channels/449175561529589761/886287835018178560`);
+              Modules.TransitionUtil?.transitionTo(
+                `/channels/449175561529589761/886287835018178560`,
+              );
               return;
             }
-            const inviteInfo = await InviteActions.resolveInvite(USBBG_SERVER_INVITE_CODE);
+            const inviteInfo = await Modules.InviteActions?.resolveInvite(USBBG_SERVER_INVITE_CODE);
             if (inviteInfo.invite == null) {
               Toasts.toast("Error Resolving Invite, Try Different Invite.", Toasts.Kind.FAILURE);
               return;
@@ -39,7 +42,7 @@ export default () => (
         <Clickable
           onClick={() => {
             FluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
-            TransitionUtil.transitionTo(`/channels/449175561529589761/886287835018178560`);
+            Modules.TransitionUtil?.transitionTo(`/channels/449175561529589761/886287835018178560`);
           }}>
           #background-request
         </Clickable>
@@ -64,7 +67,7 @@ export default () => (
         <Clickable
           onClick={() => {
             FluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
-            TransitionUtil.transitionTo(`/channels/449175561529589761/886288041612828702`);
+            Modules.TransitionUtil?.transitionTo(`/channels/449175561529589761/886288041612828702`);
           }}>
           #userbg-log ,
         </Clickable>
@@ -77,7 +80,7 @@ export default () => (
       discord/database again.
     </Text.Normal>
     <span style={{ alignSelf: "center", margin: "1%" }}>
-      <Invite author={UltimateUserStore.getCurrentUser()} code={USBBG_SERVER_INVITE_CODE} />
+      <Modules.Invite author={UltimateUserStore.getCurrentUser()} code={USBBG_SERVER_INVITE_CODE} />
     </span>
   </Flex>
 );

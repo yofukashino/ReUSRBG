@@ -4,12 +4,13 @@ import {
   guilds as UltimateGuildStore,
 } from "replugged/common";
 import { Tooltip } from "replugged/components";
-import { IconClasses, InviteActions, TransitionUtil } from "../lib/requiredModules";
 import { USBBG_SERVER_ID, USBBG_SERVER_INVITE_CODE } from "../lib/consts";
+import Modules from "../lib/requiredModules";
+
 export default () => (
   <Tooltip
     text="USRBG Banner"
-    className={`${IconClasses.iconItem} usr-bg-icon-clickable`}
+    className={`${Modules.IconClasses?.iconItem} usr-bg-icon-clickable`}
     style={{
       position: "absolute",
       right: "12px",
@@ -19,10 +20,10 @@ export default () => (
       onClick={async (): Promise<void> => {
         if (UltimateGuildStore.getGuild(USBBG_SERVER_ID)) {
           FluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
-          TransitionUtil.transitionTo(`/channels/449175561529589761/886287835018178560`);
+          Modules.TransitionUtil?.transitionTo(`/channels/449175561529589761/886287835018178560`);
           return;
         }
-        const inviteInfo = await InviteActions.resolveInvite(USBBG_SERVER_INVITE_CODE);
+        const inviteInfo = await Modules.InviteActions?.resolveInvite(USBBG_SERVER_INVITE_CODE);
         if (inviteInfo.invite == null) {
           Toasts.toast("Error Resolving Invite, Try Different Invite.", Toasts.Kind.FAILURE);
           return;
@@ -34,7 +35,7 @@ export default () => (
         });
       }}>
       <svg
-        className={IconClasses.actionIcon}
+        className={Modules.IconClasses?.actionIcon}
         viewBox="0 0 24 24"
         style={{
           width: "18px",
