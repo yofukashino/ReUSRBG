@@ -8,10 +8,8 @@ Modules.loadModules = async (): Promise<void> => {
   Modules.InviteActions ??= await webpack.waitForProps<Types.InviteActions>(
     "acceptInviteAndTransitionToInviteChannel",
   );
-  Modules.AvatarClasses ??= await webpack.waitForProps<Types.AvatarClasses>("avatarWrapperNormal");
-  Modules.UserAvatarParent ??= await webpack.waitForProps<Types.GenericModule>(
-    "UserPopoutBadgeList",
-    "UserPopoutAvatar",
+  Modules.DisplayProfileUtils ??= await webpack.waitForProps<Types.DisplayProfileUtils>(
+    "getDisplayProfile",
   );
   Modules.UserBannerParent ??= await webpack
     .waitForModule<Types.GenericExport>(webpack.filters.bySource("darkenOnHover:"), {
@@ -30,6 +28,7 @@ Modules.loadModules = async (): Promise<void> => {
   Modules.Invite ??= await webpack.waitForModule<Types.InviteComponent>(
     webpack.filters.bySource(".AnalyticsPages.INVITE_EMBED"),
   );
+  Modules.BannerLoader ??= await webpack.waitForProps<Types.BannerLoader>("BannerLoadingStatus");
 };
 
 export default Modules;

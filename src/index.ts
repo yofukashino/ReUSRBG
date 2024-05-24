@@ -6,7 +6,7 @@ export const PluginLogger = Logger.plugin("ReUSRBG", "#b380ff");
 export const USRDB = new Map<string, Types.USRBD_USER>();
 export const SettingValues = await settings.init("dev.tharki.ReUSRBG", defaultSettings);
 import Settings from "./Components/Settings";
-import Injections from "./patches/index";
+import Injections from "./injections/index";
 import Utils from "./lib/utils";
 import Types from "./types";
 

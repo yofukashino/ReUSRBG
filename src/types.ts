@@ -82,20 +82,7 @@ export namespace Types {
     showPremiumBadgeUpsell: boolean;
     user: User;
   }
-  export interface UserAvatarArgs {
-    channelId: string;
-    disableUserProfileLink: boolean;
-    displayProfile: DisplayProfile;
-    guildId: null | string;
-    isHovering: boolean;
-    isMobile: boolean;
-    isStreaming: boolean;
-    onClose: DefaultTypes.AnyFunction;
-    onOpenPremiumSettings: DefaultTypes.AnyFunction;
-    showPremiumBadgeUpsell: boolean;
-    status: string;
-    user: User;
-  }
+
   export interface USRBD_USER {
     img: string;
     uid: string;
@@ -170,22 +157,27 @@ export namespace Types {
     subtitleHasThreads: string;
     summary: string;
   }
-  export interface AvatarClasses {
-    avatarDecorationHint: string;
-    avatarHint: string;
-    avatarHintInner: string;
-    avatarHoverTarget: string;
-    avatarPositionNormal: string;
-    avatarPositionPanel: string;
-    avatarPositionPomelo: string;
-    avatarPositionPremiumBanner: string;
-    avatarPositionPremiumNoBanner: string;
-    avatarWrapper: string;
-    avatarWrapperNonUserBot: string;
-    avatarWrapperNormal: string;
-    clickable: string;
-    profileBadges: string;
-    warningCircleIcon: string;
+  export enum BannerLoadingStatus {
+    COMPLETE = 2,
+    LOADING = 1,
+    SHOULD_LOAD = 0,
+  }
+  export interface BannerLoader {
+    BannerLoadingStatus: typeof BannerLoadingStatus;
+    default: (bannerOptions: {
+      canAnimate: boolean;
+      displayProfile: DisplayProfile;
+      overrideBannerSrc: string;
+      size: number;
+    }) => {
+      bannerSrc: string;
+      status: number;
+    };
+  }
+  export interface DisplayProfileUtils {
+    default: (userId: string, guildId: string) => DisplayProfile;
+    getDisplayProfile: (userId: string, guildId: string) => DisplayProfile;
+    useDisplayProfileWithFetchEffect: (userId: string, guildId: string) => DisplayProfile;
   }
   export interface Settings {
     nitroBanner: boolean;
@@ -195,12 +187,12 @@ export namespace Types {
     loadModules?: () => Promise<void>;
     IconClasses?: IconClasses;
     InviteActions?: InviteActions;
-    AvatarClasses?: AvatarClasses;
-    UserAvatarParent?: GenericModule;
+    DisplayProfileUtils?: DisplayProfileUtils;
     UserBannerParent?: GenericModule;
     UserBannerConstructor?: GenericModule;
     TransitionUtil?: TransitionUtil;
     Invite?: InviteComponent;
+    BannerLoader?: BannerLoader;
   }
 }
 export default Types;

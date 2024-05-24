@@ -6,35 +6,6 @@ import Types from "../types";
 
 export default (): void => {
   const { UserBannerConstructor, UserBannerParent } = Modules;
-  PluginInjector.before(UserBannerParent, "default", (args: [Types.UserBannerArgs]) => {
-    const [UserBannerArgs] = args;
-    if (
-      !USRDB.has(UserBannerArgs.user.id) ||
-      (UserBannerArgs?.displayProfile?._userProfile?.banner &&
-        SettingValues.get("nitroBanner", defaultSettings.nitroBanner))
-    )
-      return args;
-    const { img } = USRDB.get(UserBannerArgs.user.id);
-    UserBannerArgs.bannerSrc = img;
-    if (!UserBannerArgs.displayProfile) return args;
-    const originalPremiumProps = Object.fromEntries(
-      Object.getOwnPropertyNames(Object.getPrototypeOf(UserBannerArgs.displayProfile))
-        .filter((key) => typeof UserBannerArgs.displayProfile[key] !== "function")
-        .map((key) => [key, UserBannerArgs.displayProfile[key]]),
-    );
-    for (const key in originalPremiumProps)
-      Object.defineProperty(UserBannerArgs.displayProfile, key, {
-        get: () => originalPremiumProps[key],
-        configurable: true,
-      });
-    Object.defineProperty(UserBannerArgs.displayProfile, "premiumType", {
-      get: () => 2,
-      configurable: true,
-    });
-    UserBannerArgs.displayProfile.getBannerURL = () => img;
-
-    return args;
-  });
   PluginInjector.after(
     UserBannerParent,
     "default",
