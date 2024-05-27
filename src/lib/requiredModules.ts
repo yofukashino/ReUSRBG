@@ -29,6 +29,14 @@ Modules.loadModules = async (): Promise<void> => {
     webpack.filters.bySource(".AnalyticsPages.INVITE_EMBED"),
   );
   Modules.BannerLoader ??= await webpack.waitForProps<Types.BannerLoader>("BannerLoadingStatus");
+  Modules.HeaderButton ??= await webpack.waitForModule<Types.HeaderButton>(
+    webpack.filters.bySource(".TooltipContainer,{tooltipClassName"),
+  );
+  Modules.ProfileHeader ??= await webpack
+    .waitForModule<Types.GenericExport>(webpack.filters.bySource(".biteSize]"), {
+      raw: true,
+    })
+    .then(({ exports }) => exports);
 };
 
 export default Modules;

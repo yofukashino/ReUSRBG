@@ -1,10 +1,18 @@
 import { types } from "replugged";
-import { User } from "discord-types/general";
+import util from "replugged/dist/renderer/util";
+import GeneralDiscordTypes from "discord-types/general";
 export namespace Types {
   export import DefaultTypes = types;
-  export interface GenericModule extends Record<string, DefaultTypes.AnyFunction> {}
+  export type User = GeneralDiscordTypes.User;
+  export type UtilTree = util.Tree;
+  export type ReactTree = util.Tree & React.ReactElement;
+  export type GenericModule = Record<string, DefaultTypes.AnyFunction> & {
+    default: DefaultTypes.AnyFunction;
+  };
   export interface GenericExport {
-    exports: GenericModule;
+    exports?: GenericModule;
+    id: string;
+    loaded: boolean;
   }
   export interface GuildMemberProfile {
     accentColor: undefined | number;
@@ -179,10 +187,11 @@ export namespace Types {
     getDisplayProfile: (userId: string, guildId: string) => DisplayProfile;
     useDisplayProfileWithFetchEffect: (userId: string, guildId: string) => DisplayProfile;
   }
-  export interface Settings {
-    nitroBanner: boolean;
-    settingsBanner: boolean;
-  }
+  export type HeaderButton = React.ComponentType<{
+    icon?: () => React.ReactNode;
+    text?: string;
+    onClick?: () => void;
+  }>;
   export interface Modules {
     loadModules?: () => Promise<void>;
     IconClasses?: IconClasses;
@@ -193,6 +202,12 @@ export namespace Types {
     TransitionUtil?: TransitionUtil;
     Invite?: InviteComponent;
     BannerLoader?: BannerLoader;
+    HeaderButton?: HeaderButton;
+    ProfileHeader?: GenericModule;
+  }
+  export interface Settings {
+    nitroBanner: boolean;
+    settingsBanner: boolean;
   }
 }
 export default Types;
