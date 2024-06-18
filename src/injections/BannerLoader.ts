@@ -11,7 +11,7 @@ export default (): void => {
         SettingValues.get("nitroBanner", defaultSettings.nitroBanner))
     )
       return res;
-    const { img } = USRDB.get(displayProfile?.userId);
+    const img = USRDB.get(displayProfile?.userId);
     res.bannerSrc = img;
     return res;
   });

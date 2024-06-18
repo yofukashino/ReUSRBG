@@ -44,12 +44,12 @@ export default () => (
             FluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
             Modules.TransitionUtil?.transitionTo(`/channels/449175561529589761/886287835018178560`);
           }}>
-          #background-request
+          #click-here-to-request
         </Clickable>
       </Flex>
     </Text.Normal>
     <Text.Normal>
-      <b>🔹</b> Click UPLOAD button and UPLOAD your image from your device.
+      <b>🔹</b> Type /bg and select the command. Upload for banner in the file option.
       <br />
       • Only .GIF .PNG .JPG .JPEG will be accepted. <br />
       • Max-size: 10MB

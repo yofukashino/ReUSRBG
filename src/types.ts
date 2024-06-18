@@ -90,12 +90,6 @@ export namespace Types {
     showPremiumBadgeUpsell: boolean;
     user: User;
   }
-
-  export interface USRBD_USER {
-    img: string;
-    uid: string;
-    _id: string;
-  }
   export type InviteComponent = React.ComponentType<{ code: string; author: User }>;
   export interface Invite {
     code: string;
@@ -191,7 +185,22 @@ export namespace Types {
     icon?: () => React.ReactNode;
     text?: string;
     onClick?: () => void;
+    variant?: "banner" | "icon" | "text";
   }>;
+  export interface UserProfileContext {
+    $$typeof: symbol;
+    Overlay: DefaultTypes.AnyFunction;
+    render: (
+      props: {
+        children: React.ReactElement[];
+        className: string;
+        displayProfile: DisplayProfile;
+        profileType: string;
+        user: User;
+      },
+      ...args: unknown[]
+    ) => React.ReactElement;
+  }
   export interface Modules {
     loadModules?: () => Promise<void>;
     IconClasses?: IconClasses;
@@ -203,7 +212,7 @@ export namespace Types {
     Invite?: InviteComponent;
     BannerLoader?: BannerLoader;
     HeaderButton?: HeaderButton;
-    ProfileHeader?: GenericModule;
+    UserProfileContext?: UserProfileContext;
   }
   export interface Settings {
     nitroBanner: boolean;

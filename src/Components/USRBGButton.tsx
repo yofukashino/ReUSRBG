@@ -39,5 +39,6 @@ export default () => (
         ...inviteInfo,
       });
     }}
+    variant="banner"
   />
 );
