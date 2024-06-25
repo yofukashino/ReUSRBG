@@ -21,7 +21,10 @@ Modules.loadModules = async (): Promise<void> => {
     });
 
   Modules.DisplayProfileUtils ??= await webpack
-    .waitForProps<Types.DisplayProfileUtils>(["getDisplayProfile"], { timeout: 10000 })
+    .waitForModule<Types.DisplayProfileUtils>(
+      webpack.filters.bySource(/{guildId:null!=\w+\?\w+:void 0}/),
+      { timeout: 10000 },
+    )
     .catch(() => {
       throw new Error("Failed To Find DisplayProfileUtils Module");
     });
@@ -46,23 +49,41 @@ Modules.loadModules = async (): Promise<void> => {
       throw new Error("Failed To Find UserBannerConstructor Module");
     });
 
-  Modules.TransitionUtil ??= await webpack
-    .waitForProps<Types.TransitionUtil>(["transitionTo", "transitionToGuild"], { timeout: 10000 })
-    .catch(() => {
-      throw new Error("Failed To Find TransitionUtil Module");
-    });
-
-  Modules.Invite ??= await webpack
-    .waitForModule<Types.InviteComponent>(
-      webpack.filters.bySource(".AnalyticsPages.INVITE_EMBED"),
+  Modules.RoutingUtilsModule ??= await webpack
+    .waitForModule<Types.GenericModule>(
+      webpack.filters.bySource("transitionTo - Transitioning to"),
       { timeout: 10000 },
     )
+    .catch(() => {
+      throw new Error("Failed To Find RoutingUtils Module");
+    });
+
+  Modules.RoutingUtils ??= {
+    back: webpack.getFunctionBySource(Modules.RoutingUtilsModule, "goBack()"),
+    forward: webpack.getFunctionBySource(Modules.RoutingUtilsModule, "goForward()"),
+    getFingerprintLocation: webpack.getFunctionBySource(Modules.RoutingUtilsModule, ".REJECT_IP"),
+    isValidFingerprintRoute: webpack.getFunctionBySource(Modules.RoutingUtilsModule, ".HANDOFF"),
+    replaceWith: webpack.getFunctionBySource(Modules.RoutingUtilsModule, "Replacing route with"),
+    transitionTo: webpack.getFunctionBySource(
+      Modules.RoutingUtilsModule,
+      "transitionTo - Transitioning to",
+    ),
+    transitionToGuild: webpack.getFunctionBySource(
+      Modules.RoutingUtilsModule,
+      "transitionToGuild - Transitioning to",
+    ),
+  };
+
+  Modules.Invite ??= await webpack
+    .waitForModule<Types.InviteComponent>(webpack.filters.bySource(".getInviteError"), {
+      timeout: 10000,
+    })
     .catch(() => {
       throw new Error("Failed To Find Invite Module");
     });
 
   Modules.BannerLoader ??= await webpack
-    .waitForProps<Types.BannerLoader>(["BannerLoadingStatus"], {
+    .waitForModule<Types.GenericModule>(webpack.filters.bySource("SHOULD_LOAD=0"), {
       timeout: 10000,
     })
     .catch(() => {
@@ -79,7 +100,7 @@ Modules.loadModules = async (): Promise<void> => {
 
   Modules.UserProfileContext ??= await webpack
     .waitForModule<Types.UserProfileContext>(
-      webpack.filters.bySource(".UserProfileThemeContextProvider"),
+      webpack.filters.bySource(".userPopoutOverlayBackground"),
       { timeout: 10000 },
     )
     .catch(() => {

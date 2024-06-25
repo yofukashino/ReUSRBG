@@ -20,7 +20,7 @@ export default () => (
       onClick={async (): Promise<void> => {
         if (UltimateGuildStore.getGuild(USBBG_SERVER_ID)) {
           FluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
-          Modules.TransitionUtil?.transitionTo(`/channels/449175561529589761/886287835018178560`);
+          Modules.RoutingUtils?.transitionTo(`/channels/449175561529589761/886287835018178560`);
           return;
         }
         const inviteInfo = await Modules.InviteActions?.resolveInvite(USBBG_SERVER_INVITE_CODE);

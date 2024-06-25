@@ -1,14 +1,36 @@
+import { webpack } from "replugged";
 import { PluginInjector, SettingValues, USRDB } from "../index";
 import { defaultSettings } from "../lib/consts";
 import Modules from "../lib/requiredModules";
 import USRBGIcon from "../Components/USRBGIcon";
 import Types from "../types";
 
-export default (): void => {
-  const { UserBannerConstructor, UserBannerParent } = Modules;
+export const injectUserBannerConstructor = (): void => {
+  const { UserBannerConstructor } = Modules;
+  const loader = webpack.getFunctionKeyBySource(UserBannerConstructor, "profileType:");
+  PluginInjector.after(
+    UserBannerConstructor,
+    loader,
+    ([UserBannerArgs]: [Types.UserBannerArgs], res: React.ReactElement) => {
+      if (
+        UserBannerArgs.profileType !== "SETTINGS" ||
+        !UserBannerArgs.hasBanner ||
+        !SettingValues.get("settingsBanner", defaultSettings.settingsBanner)
+      )
+        return res;
+      res.props.className = `${res.props.className} usrbg`;
+      res.props.viewBox = "0 0 660 233";
+      return res;
+    },
+  );
+};
+
+export const injectUserBannerParent = (): void => {
+  const { UserBannerParent } = Modules;
+  const loader = webpack.getFunctionKeyBySource(UserBannerParent, "displayProfile:");
   PluginInjector.after(
     UserBannerParent,
-    "default",
+    loader,
     ([UserBannerArgs]: [Types.UserBannerArgs], res: React.ReactElement) => {
       if (
         !USRDB.has(UserBannerArgs.user.id) ||
@@ -31,20 +53,9 @@ export default (): void => {
       return res;
     },
   );
+};
 
-  PluginInjector.after(
-    UserBannerConstructor,
-    "default",
-    ([UserBannerArgs]: [Types.UserBannerArgs], res: React.ReactElement) => {
-      if (
-        UserBannerArgs.profileType !== "SETTINGS" ||
-        !UserBannerArgs.hasBanner ||
-        !SettingValues.get("settingsBanner", defaultSettings.settingsBanner)
-      )
-        return res;
-      res.props.className = `${res.props.className} usrbg`;
-      res.props.viewBox = "0 0 660 233";
-      return res;
-    },
-  );
+export default (): void => {
+  injectUserBannerConstructor();
+  injectUserBannerParent();
 };

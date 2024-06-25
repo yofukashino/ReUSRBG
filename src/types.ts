@@ -43,15 +43,15 @@ export namespace Types {
     themeColors: undefined | string;
     userId: string;
   }
-  export interface TransitionUtil {
+  export interface RoutingUtils {
     back: DefaultTypes.AnyFunction;
     forward: DefaultTypes.AnyFunction;
-    getFingerprintLocation: DefaultTypes.AnyFunction;
-    getHistory: DefaultTypes.AnyFunction;
-    getLastRouteChangeSource: DefaultTypes.AnyFunction;
-    getLastRouteChangeSourceLocationStack: DefaultTypes.AnyFunction;
-    hasNavigated: DefaultTypes.AnyFunction;
-    isValidFingerprintRoute: DefaultTypes.AnyFunction;
+    getFingerprintLocation?: DefaultTypes.AnyFunction;
+    getHistory?: DefaultTypes.AnyFunction;
+    getLastRouteChangeSource?: DefaultTypes.AnyFunction;
+    getLastRouteChangeSourceLocationStack?: DefaultTypes.AnyFunction;
+    hasNavigated?: DefaultTypes.AnyFunction;
+    isValidFingerprintRoute?: DefaultTypes.AnyFunction;
     replaceWith: DefaultTypes.AnyFunction;
     transitionTo: DefaultTypes.AnyFunction;
     transitionToGuild: DefaultTypes.AnyFunction;
@@ -159,23 +159,7 @@ export namespace Types {
     subtitleHasThreads: string;
     summary: string;
   }
-  export enum BannerLoadingStatus {
-    COMPLETE = 2,
-    LOADING = 1,
-    SHOULD_LOAD = 0,
-  }
-  export interface BannerLoader {
-    BannerLoadingStatus: typeof BannerLoadingStatus;
-    default: (bannerOptions: {
-      canAnimate: boolean;
-      displayProfile: DisplayProfile;
-      overrideBannerSrc: string;
-      size: number;
-    }) => {
-      bannerSrc: string;
-      status: number;
-    };
-  }
+
   export interface DisplayProfileUtils {
     default: (userId: string, guildId: string) => DisplayProfile;
     getDisplayProfile: (userId: string, guildId: string) => DisplayProfile;
@@ -208,9 +192,10 @@ export namespace Types {
     DisplayProfileUtils?: DisplayProfileUtils;
     UserBannerParent?: GenericModule;
     UserBannerConstructor?: GenericModule;
-    TransitionUtil?: TransitionUtil;
+    RoutingUtilsModule?: GenericModule;
+    RoutingUtils?: RoutingUtils;
     Invite?: InviteComponent;
-    BannerLoader?: BannerLoader;
+    BannerLoader?: GenericModule;
     HeaderButton?: HeaderButton;
     UserProfileContext?: UserProfileContext;
   }

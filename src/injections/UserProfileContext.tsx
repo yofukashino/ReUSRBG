@@ -9,7 +9,9 @@ export default (): void => {
   const { UserProfileContext } = Modules;
   PluginInjector.before(UserProfileContext, "render", (args) => {
     const [props] = args;
-    const profileHeader = props?.children?.find((c) =>
+    if (!props?.children) return args;
+    if (!Array.isArray(props?.children)) props.children = [props?.children];
+    const profileHeader = props?.children?.find?.((c) =>
       /{profileType:\w+,children:\w+}=/.exec(c?.type?.toString()),
     );
     if (
