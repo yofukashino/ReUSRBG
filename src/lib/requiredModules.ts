@@ -22,7 +22,7 @@ Modules.loadModules = async (): Promise<void> => {
 
   Modules.DisplayProfileUtils ??= await webpack
     .waitForModule<Types.DisplayProfileUtils>(
-      webpack.filters.bySource(/{guildId:null!=\w+\?\w+:void 0}/),
+      webpack.filters.bySource(/getUser\(.\),.=.\.getUserProfile/),
       { timeout: 10000 },
     )
     .catch(() => {
