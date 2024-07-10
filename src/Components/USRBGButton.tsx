@@ -21,7 +21,7 @@ export default () => (
         />
       </svg>
     )}
-    text="USRBG Banner"
+    tooltipText="USRBG Banner"
     onClick={async (): Promise<void> => {
       if (UltimateGuildStore.getGuild(USBBG_SERVER_ID)) {
         FluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });

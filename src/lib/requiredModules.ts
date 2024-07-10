@@ -91,9 +91,10 @@ Modules.loadModules = async (): Promise<void> => {
     });
 
   Modules.HeaderButton ??= await webpack
-    .waitForModule<Types.HeaderButton>(webpack.filters.bySource('.banner]:"banner"==='), {
+    .waitForModule(webpack.filters.bySource(".bannerColor,"), {
       timeout: 10000,
     })
+    .then((mod) => webpack.getFunctionBySource<Types.HeaderButton>(mod, ".bannerColor,"))
     .catch(() => {
       throw new Error("Failed To Find HeaderButton Module");
     });

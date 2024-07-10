@@ -167,7 +167,7 @@ export namespace Types {
   }
   export type HeaderButton = React.ComponentType<{
     icon?: () => React.ReactNode;
-    text?: string;
+    tooltipText?: string;
     onClick?: () => void;
     variant?: "banner" | "icon" | "text";
   }>;
