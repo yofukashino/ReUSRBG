@@ -14,20 +14,20 @@
   opacity: 100% !important;
 }
 
-[class*="bannerSVGWrapper"].usrbg {
+[class^="accountProfileCard"] .usrbg {
   min-height: 233px !important;
 }
 
-[class*="bannerSVGWrapper"].usrbg mask circle {
+[class^="accountProfileCard"] .usrbg mask circle {
   cy: 253 !important;
 }
 
-[class*="bannerSVGWrapper"].usrbg [class*="settingsBanner"] {
+[class^="accountProfileCard"] .usrbg [class^="banner"] {
   height: 223px !important;
   min-height: 223px !important;
 }
 
-[class*="bannerSVGWrapper"].usrbg + div [class*="avatar_"] {
+[class^="accountProfileCard"] .usrbg + div [class*="avatar_"] {
   top: 213px !important;
 }
 

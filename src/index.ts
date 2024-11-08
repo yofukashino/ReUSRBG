@@ -8,6 +8,7 @@ export const SettingValues = await settings.init("dev.tharki.ReUSRBG", defaultSe
 import Settings from "./Components/Settings";
 import Injections from "./injections/index";
 import Utils from "./lib/utils";
+export const USRDBStatic = new Utils.LimitedMap<string, string | null>(250);
 
 export const start = (): void => {
   void Utils.loadUSRBD();
@@ -20,3 +21,5 @@ export const stop = (): void => {
 };
 
 export { Settings } from "./Components/Settings";
+
+export { _isAnimatedUSRBG } from "./plaintextFunctions";

@@ -29,26 +29,6 @@ Modules.loadModules = async (): Promise<void> => {
       throw new Error("Failed To Find DisplayProfileUtils Module");
     });
 
-  Modules.UserBannerParent ??= await webpack
-    .waitForModule<Types.GenericExport>(webpack.filters.bySource("darkenOnHover:"), {
-      raw: true,
-      timeout: 10000,
-    })
-    .then(({ exports }) => exports)
-    .catch(() => {
-      throw new Error("Failed To Find UserBannerParent Module");
-    });
-
-  Modules.UserBannerConstructor ??= await webpack
-    .waitForModule<Types.GenericExport>(webpack.filters.bySource(".bannerSVGWrapper"), {
-      raw: true,
-      timeout: 10000,
-    })
-    .then(({ exports }) => exports)
-    .catch(() => {
-      throw new Error("Failed To Find UserBannerConstructor Module");
-    });
-
   Modules.RoutingUtilsModule ??= await webpack
     .waitForModule<Types.GenericModule>(
       webpack.filters.bySource("transitionTo - Transitioning to"),
@@ -83,9 +63,11 @@ Modules.loadModules = async (): Promise<void> => {
     });
 
   Modules.BannerLoader ??= await webpack
-    .waitForModule<Types.GenericModule>(webpack.filters.bySource("SHOULD_LOAD=0"), {
+    .waitForModule<Types.GenericExport>(webpack.filters.bySource('="SHOULD_LOAD"'), {
       timeout: 10000,
+      raw: true,
     })
+    .then(({ exports }) => exports)
     .catch(() => {
       throw new Error("Failed To Find BannerLoader Module");
     });
@@ -94,18 +76,34 @@ Modules.loadModules = async (): Promise<void> => {
     .waitForModule(webpack.filters.bySource(".bannerColor,"), {
       timeout: 10000,
     })
-    .then((mod) => webpack.getFunctionBySource<Types.HeaderButton>(mod, ".bannerColor,"))
+    .then((mod) =>
+      webpack.getFunctionBySource<Types.HeaderButton>(mod, /{className:.,innerClassName:.,....}/),
+    )
     .catch(() => {
       throw new Error("Failed To Find HeaderButton Module");
     });
 
   Modules.UserProfileContext ??= await webpack
     .waitForModule<Types.UserProfileContext>(
-      webpack.filters.bySource(".userPopoutOverlayBackground"),
-      { timeout: 10000 },
+      webpack.filters.bySource(".ThemeContextProvider,{theme:null!="),
+      {
+        timeout: 10000,
+      },
     )
     .catch(() => {
       throw new Error("Failed To Find UserProfileContext Module");
+    });
+
+  Modules.UserBannerConstructorPromise ??= webpack
+    .waitForModule<Types.GenericExport>(
+      webpack.filters.bySource(".canUsePremiumProfileCustomization)||!1;"),
+      {
+        raw: true,
+      },
+    )
+    .then(({ exports }) => exports)
+    .catch(() => {
+      throw new Error("Failed To Find UserBannerConstructor Module");
     });
 };
 

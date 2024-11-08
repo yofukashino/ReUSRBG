@@ -89,6 +89,8 @@ export namespace Types {
     profileType: string;
     showPremiumBadgeUpsell: boolean;
     user: User;
+    bannerHeight: number;
+    bannerWidth: number;
   }
   export type InviteComponent = React.ComponentType<{ code: string; author: User }>;
   export interface Invite {
@@ -190,14 +192,15 @@ export namespace Types {
     IconClasses?: IconClasses;
     InviteActions?: InviteActions;
     DisplayProfileUtils?: DisplayProfileUtils;
-    UserBannerParent?: GenericModule;
-    UserBannerConstructor?: GenericModule;
+
     RoutingUtilsModule?: GenericModule;
     RoutingUtils?: RoutingUtils;
     Invite?: InviteComponent;
     BannerLoader?: GenericModule;
     HeaderButton?: HeaderButton;
     UserProfileContext?: UserProfileContext;
+    UserBannerParentPromise?: Promise<GenericModule>;
+    UserBannerConstructorPromise?: Promise<GenericModule>;
   }
   export interface Settings {
     nitroBanner: boolean;

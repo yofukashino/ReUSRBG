@@ -3,11 +3,11 @@
   "name": "ReUSRBG",
   "description": "User profile backgrounds for Replugged. (Banners are fetched from the USRBG database.)",
   "image": "https://i.imgur.com/dAd2DmA.png",
-  "source": "https://github.com/YofukashiNo/ReUSRBG/",
+  "source": "https://github.com/yofukashino/ReUSRBG/",
   "author": {
     "name": "Nanakusa",
     "discordID": "1121961711080050780",
-    "github": "YofukashiNo"
+    "github": "yofukashino"
   },
   "version": "1.6.1",
   "updater": {
@@ -16,5 +16,6 @@
   },
   "license": "MIT",
   "type": "replugged-plugin",
-  "renderer": "src/index.ts"
+  "renderer": "src/index.ts",
+  "plaintextPatches": "src/plaintextPatches.ts"
 }

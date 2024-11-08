@@ -11,7 +11,7 @@ export default (): void => {
     BannerLoader,
     loader,
     (
-      [{ displayProfile }]: [
+      [{ displayProfile, canAnimate }]: [
         {
           canAnimate: boolean;
           displayProfile: Types.DisplayProfile;
@@ -31,7 +31,8 @@ export default (): void => {
       )
         return res;
       const img = USRDB.get(displayProfile?.userId);
-      res.bannerSrc = img;
+      if (canAnimate) res.bannerSrc = img;
+      res.status = 2;
       return res;
     },
   );
