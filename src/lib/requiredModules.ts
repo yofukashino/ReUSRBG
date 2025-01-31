@@ -63,7 +63,7 @@ Modules.loadModules = async (): Promise<void> => {
     });
 
   Modules.BannerLoader ??= await webpack
-    .waitForModule<Types.GenericExport>(webpack.filters.bySource('="SHOULD_LOAD"'), {
+    .waitForModule<Types.GenericExport>(webpack.filters.bySource('"SHOULD_LOAD"'), {
       timeout: 10000,
       raw: true,
     })
@@ -85,7 +85,7 @@ Modules.loadModules = async (): Promise<void> => {
 
   Modules.UserProfileContext ??= await webpack
     .waitForModule<Types.UserProfileContext>(
-      webpack.filters.bySource(".ThemeContextProvider,{theme:null!="),
+      webpack.filters.bySource(/{profileThemeStyle:\w+,profileThemeClassName:\w+}/),
       {
         timeout: 10000,
       },
