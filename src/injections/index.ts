@@ -6,7 +6,7 @@ import injectUserProfileContext from "./UserProfileContext";
 export const applyInjections = async (): Promise<void> => {
   await Modules.loadModules();
   injectBannerLoader();
-  injectBanners();
+  void injectBanners();
   injectDisplayProfileUtils();
   injectUserProfileContext();
 };
