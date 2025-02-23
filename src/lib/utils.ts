@@ -31,7 +31,7 @@ export const gifToPng = async (url: string): Promise<string | null> => {
 
     const contentType = response.headers.get("Content-Type");
     if (contentType !== "image/gif") {
-      console.log("URL is not a GIF");
+      PluginLogger.log("URL is not a GIF");
       return null;
     }
 
@@ -61,7 +61,7 @@ export const gifToPng = async (url: string): Promise<string | null> => {
       reader.readAsDataURL(blob);
     });
   } catch (error) {
-    console.error("Error fetching or processing the GIF:", error);
+    PluginLogger.error("Error fetching or processing the GIF:", error);
     return null;
   }
 };

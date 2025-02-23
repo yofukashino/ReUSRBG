@@ -172,6 +172,7 @@ export namespace Types {
     tooltipText?: string;
     onClick?: () => void;
     variant?: "banner" | "icon" | "text";
+    className?: string;
   }>;
   export interface UserProfileContext {
     $$typeof: symbol;

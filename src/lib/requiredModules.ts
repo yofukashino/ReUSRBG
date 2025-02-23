@@ -76,9 +76,11 @@ Modules.loadModules = async (): Promise<void> => {
     .waitForModule(webpack.filters.bySource(".bannerColor,"), {
       timeout: 10000,
     })
-    .then((mod) =>
-      webpack.getFunctionBySource<Types.HeaderButton>(mod, /{className:.,innerClassName:.,....}/),
-    )
+    .then((mod) => {
+      const comp = webpack.getFunctionBySource<Types.HeaderButton>(mod, "tooltipDelay:");
+      if (comp) return comp;
+      throw new Error();
+    })
     .catch(() => {
       throw new Error("Failed To Find HeaderButton Module");
     });

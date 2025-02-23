@@ -8,6 +8,7 @@ import Modules from "../lib/requiredModules";
 
 export default () => (
   <Modules.HeaderButton
+    className="usrbg"
     icon={() => (
       <svg
         viewBox="0 0 24 24"

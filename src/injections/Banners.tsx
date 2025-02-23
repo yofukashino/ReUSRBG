@@ -1,8 +1,8 @@
 import { webpack } from "replugged";
-import { PluginInjector, SettingValues, USRDB } from "../index";
+import { PluginInjector, SettingValues } from "../index";
 import { defaultSettings } from "../lib/consts";
 import Modules from "../lib/requiredModules";
-import USRBGIcon from "../Components/USRBGIcon";
+
 import Types from "../types";
 
 export default async (): Promise<void> => {

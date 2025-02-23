@@ -6,6 +6,7 @@ import USRBGButton from "../Components/USRBGButton";
 
 export default (): void => {
   const { UserProfileContext } = Modules;
+
   PluginInjector.before(UserProfileContext, "render", (args) => {
     const [props] = args;
     if (!props?.children) return args;
@@ -28,7 +29,7 @@ export default (): void => {
     )
       return args;
 
-    const profileHeader = props?.children[profileHeaderIndex != -1 ? profileHeaderIndex : 0];
+    const profileHeader = props?.children[profileHeaderIndex !== -1 ? profileHeaderIndex : 0];
 
     if (!Array.isArray(profileHeader.props.children)) {
       profileHeader.props.children = [profileHeader.props.children];

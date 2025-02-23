@@ -1,3 +1,23 @@
+[class^="outer"] > div > div > div > .usrbg {
+  border-radius: var(--radius-round);
+  transition: background-color var(--custom-button-transition-duration) ease,
+    color var(--custom-button-transition-duration) ease;
+  background: var(--redesign-button-overlay-alpha-background);
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  display: flex;
+}
+
+[class^="outer"] > div > div > div > .usrbg:hover {
+  background: var(--redesign-button-overlay-alpha-pressed-background);
+}
+
+[class^="outer"] > div > div > div > .usrbg svg {
+  height: 16px !important;
+  width: 16px !important;
+}
+
 [class^="banner"] > .usr-bg-icon-clickable {
   opacity: 0% !important;
   border-radius: 50px;
