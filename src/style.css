@@ -1,4 +1,4 @@
-[class^="outer"] > div > div > div > .usrbg {
+.usrbg-header span {
   border-radius: var(--radius-round);
   transition: background-color var(--custom-button-transition-duration) ease,
     color var(--custom-button-transition-duration) ease;
@@ -6,14 +6,13 @@
   cursor: pointer;
   padding: 8px;
   display: flex;
-  display: flex;
 }
 
-[class^="outer"] > div > div > div > .usrbg:hover {
+.usrbg-header span:hover {
   background: var(--redesign-button-overlay-alpha-pressed-background);
 }
 
-[class^="outer"] > div > div > div > .usrbg svg {
+.usrbg-header span svg {
   height: 16px !important;
   width: 16px !important;
 }

@@ -72,19 +72,6 @@ Modules.loadModules = async (): Promise<void> => {
       throw new Error("Failed To Find BannerLoader Module");
     });
 
-  Modules.HeaderButton ??= await webpack
-    .waitForModule(webpack.filters.bySource(".bannerColor,"), {
-      timeout: 10000,
-    })
-    .then((mod) => {
-      const comp = webpack.getFunctionBySource<Types.HeaderButton>(mod, "tooltipDelay:");
-      if (comp) return comp;
-      throw new Error();
-    })
-    .catch(() => {
-      throw new Error("Failed To Find HeaderButton Module");
-    });
-
   Modules.UserProfileContext ??= await webpack
     .waitForModule<Types.UserProfileContext>(
       webpack.filters.bySource(/{profileThemeStyle:\w+,profileThemeClassName:\w+}/),

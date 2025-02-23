@@ -167,13 +167,6 @@ export namespace Types {
     getDisplayProfile: (userId: string, guildId: string) => DisplayProfile;
     useDisplayProfileWithFetchEffect: (userId: string, guildId: string) => DisplayProfile;
   }
-  export type HeaderButton = React.ComponentType<{
-    icon?: () => React.ReactNode;
-    tooltipText?: string;
-    onClick?: () => void;
-    variant?: "banner" | "icon" | "text";
-    className?: string;
-  }>;
   export interface UserProfileContext {
     $$typeof: symbol;
     Overlay: DefaultTypes.AnyFunction;
@@ -193,12 +186,10 @@ export namespace Types {
     IconClasses?: IconClasses;
     InviteActions?: InviteActions;
     DisplayProfileUtils?: DisplayProfileUtils;
-
     RoutingUtilsModule?: GenericModule;
     RoutingUtils?: RoutingUtils;
     Invite?: InviteComponent;
     BannerLoader?: GenericModule;
-    HeaderButton?: HeaderButton;
     UserProfileContext?: UserProfileContext;
     UserBannerParentPromise?: Promise<GenericModule>;
     UserBannerConstructorPromise?: Promise<GenericModule>;
