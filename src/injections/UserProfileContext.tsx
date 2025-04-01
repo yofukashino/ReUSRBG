@@ -13,12 +13,13 @@ export default (): void => {
     if (!Array.isArray(props?.children)) props.children = [props?.children];
 
     const profileHeaderIndex = props?.children?.findIndex?.((c) =>
-      /{profileType:\w+,children:\w+}=/.exec(c?.type?.toString()),
+      /{profileType:\w+,children:\w+}=\w+/.exec(c?.type?.toString()),
     );
     if (profileHeaderIndex === -1) {
-      const ProfileHeader = webpack.getBySource<
-        React.ComponentType<{ profileType: string; children?: React.ReactElement[] }>
-      >(/{profileType:\w+,children:\w+}=/);
+      const ProfileHeader =
+        webpack.getBySource<
+          React.ComponentType<{ profileType: string; children?: React.ReactElement[] }>
+        >(/wrapper,{\[\w+\.biteSize/);
       props?.children.unshift(<ProfileHeader profileType={props.profileType} />);
     }
 
