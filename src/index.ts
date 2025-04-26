@@ -4,7 +4,7 @@ import "./style.css";
 export const PluginInjector = new Injector();
 export const PluginLogger = Logger.plugin("ReUSRBG", "#b380ff");
 export const USRDB = new Map<string, string>();
-export const SettingValues = await settings.init("dev.tharki.ReUSRBG", defaultSettings);
+export const SettingValues = settings.init("dev.tharki.ReUSRBG", defaultSettings);
 import Settings from "./Components/Settings";
 import Injections from "./injections/index";
 import Utils from "./lib/utils";
