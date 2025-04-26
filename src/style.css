@@ -60,3 +60,30 @@
 
   border-style: dotted;
 }
+
+.headerButtonWrapper {
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  transition: opacity 0.6s ease;
+  z-index: 3;
+}
+
+.headerButtonWrapper:empty {
+  display: none;
+}
+
+.user-profile-popout .headerButtonWrapper {
+  right: 12px;
+  top: 12px;
+}
+
+.user-profile-modal .headerButtonWrapper {
+  right: 16px;
+  top: 12px;
+}
+
+.user-profile-sidebar .headerButtonWrapper {
+  right: 8px;
+  top: 8px;
+}
