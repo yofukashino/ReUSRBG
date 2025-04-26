@@ -20,7 +20,6 @@ export default (): void => {
       c?.type?.toString?.()?.includes(".wrapper,children"),
     );
 
-    console.log(container);
     if (profileHeaderIndex === -1) {
       container.unshift(<div className="headerButtonWrapper" children={[]} />);
     }
