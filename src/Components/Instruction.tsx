@@ -2,6 +2,7 @@ import {
   fluxDispatcher as FluxDispatcher,
   toast as Toasts,
   guilds as UltimateGuildStore,
+  messages as UltimateMessageStore,
   users as UltimateUserStore,
 } from "replugged/common";
 import { Clickable, Flex, Text } from "replugged/components";
@@ -78,7 +79,15 @@ export default () => (
       discord/database again.
     </Text.Normal>
     <span style={{ alignSelf: "center", margin: "1%" }}>
-      <Modules.Invite author={UltimateUserStore.getCurrentUser()} code={USBBG_SERVER_INVITE_CODE} />
+      <Modules.Invite
+        message={UltimateMessageStore.createMessage({
+          channelId: "",
+          content: "",
+          author: UltimateUserStore.getCurrentUser(),
+        })}
+        author={UltimateUserStore.getCurrentUser()}
+        code={USBBG_SERVER_INVITE_CODE}
+      />
     </span>
   </Flex>
 );

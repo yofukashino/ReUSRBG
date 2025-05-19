@@ -4,6 +4,7 @@ import GeneralDiscordTypes from "discord-types/general";
 export namespace Types {
   export import DefaultTypes = types;
   export type User = GeneralDiscordTypes.User;
+  export type Message = GeneralDiscordTypes.Message;
   export type UtilTree = util.Tree;
   export type ReactTree = util.Tree & React.ReactElement;
   export type GenericModule = Record<string, DefaultTypes.AnyFunction> & {
@@ -92,7 +93,11 @@ export namespace Types {
     bannerHeight: number;
     bannerWidth: number;
   }
-  export type InviteComponent = React.ComponentType<{ code: string; author: User }>;
+  export type InviteComponent = React.ComponentType<{
+    code: string;
+    message: Message;
+    author: User;
+  }>;
   export interface Invite {
     code: string;
     guild?: {
