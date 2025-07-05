@@ -96,7 +96,7 @@ export namespace Types {
   export type InviteComponent = React.ComponentType<{
     code: string;
     message: Message;
-    author: User;
+    getAcceptInviteContext: () => unknown;
   }>;
   export interface Invite {
     code: string;

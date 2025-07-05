@@ -85,7 +85,7 @@ export default () => (
           content: "",
           author: UltimateUserStore.getCurrentUser(),
         })}
-        author={UltimateUserStore.getCurrentUser()}
+        getAcceptInviteContext={() => {}}
         code={USBBG_SERVER_INVITE_CODE}
       />
     </span>
