@@ -10,20 +10,15 @@ PluginInjector.before(UserProfileContext, "render", (args) => {
   if (!props?.children) return args;
   if (!Array.isArray(props?.children)) props.children = [props?.children];
 
-  const container =
-    props?.children.find((v) =>
-      v?.props?.children?.some?.(
-        (c) =>
-          c?.type?.toString?.()?.includes(".wrapper,children") ||
-          c?.props?.className === "headerButtonWrapper",
-      ),
-    )?.props?.children || props?.children;
+  const headerFilter = (c: React.ReactElement): boolean =>
+    c?.type?.toString?.()?.includes(".wrapper,children") ||
+    c?.props?.className === "headerButtonWrapper";
 
-  const profileHeaderIndex = container?.findIndex?.(
-    (c) =>
-      c?.type?.toString?.()?.includes(".wrapper,children") ||
-      c?.props?.className === "headerButtonWrapper",
-  );
+  const container =
+    props?.children.find((v) => v?.props?.children?.some?.(headerFilter))?.props?.children ||
+    props?.children;
+
+  const profileHeaderIndex = container?.findIndex?.(headerFilter);
 
   if (profileHeaderIndex === -1) container.unshift(<div className="headerButtonWrapper" />);
 

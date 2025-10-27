@@ -1,11 +1,7 @@
 import { PluginInjector, PluginLogger } from "@this";
 import Modules from "@lib/RequiredModules";
 
-const InjectionNames = [
-  "BannerLoader.ts",
-  "DisplayProfileUtils.ts",
-  "UserProfileContext.tsx",
-] as const;
+const InjectionNames = ["DisplayProfile.ts", "UserProfileContext.tsx"] as const;
 
 export const applyInjections = async (): Promise<void> => {
   try {

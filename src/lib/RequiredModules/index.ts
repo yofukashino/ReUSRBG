@@ -37,8 +37,7 @@ function proxyModule<K extends Exclude<keyof Types.Modules, "loadModules" | "Pro
 }
 
 const ModuleNames = [
-  "BannerLoader",
-  "DisplayProfileUtils",
+  "DisplayProfile",
   "IconClasses",
   "Invite",
   "InviteActions",
@@ -56,8 +55,7 @@ Modules.loadModules = async function (): Promise<void> {
 };
 
 export const {
-  BannerLoader,
-  DisplayProfileUtils,
+  DisplayProfile,
   IconClasses,
   Invite,
   InviteActions,

@@ -1,4 +1,4 @@
-import { util } from "replugged";
+import { plugins, util } from "replugged";
 import { PluginLogger, USRDBStatic } from "@this";
 import USRDB from "@USRDB";
 
@@ -94,17 +94,17 @@ export const loadUSRDBStatic = async ({
 }): Promise<void> => {
   USRDBStatic.set(key, null);
 
-  const dataUri = await GifToPng(bannerUrl);
-  USRDBStatic.set(key, dataUri);
+  const blobUri = await GifToPng(bannerUrl);
+  USRDBStatic.set(key, blobUri);
 
-  if (dataUri === null) return;
+  if (blobUri === null) return;
 
   const banner: HTMLDivElement = document.querySelector(`[class^="banner"][style*="${bannerUrl}"]`);
   if (!banner) return;
 
   const reactInstance = util.getReactInstance(banner);
-  if (!reactInstance.return) return;
-  console.log({ ...reactInstance });
+  if (!reactInstance?.return) return;
+
   reactInstance.return.key = "USRDBStatic";
 };
 
@@ -124,4 +124,6 @@ export const tryUSRDBStatic = (userId: string): string => {
   return bannerUrl;
 };
 
-export default { LimitedMap, GifToPng, loadUSRDBStatic, tryUSRDBStatic };
+export const isDisabled = (): boolean => plugins.getDisabled().includes("dev.tharki.ReUSRBG");
+
+export default { LimitedMap, GifToPng, loadUSRDBStatic, tryUSRDBStatic, isDisabled };

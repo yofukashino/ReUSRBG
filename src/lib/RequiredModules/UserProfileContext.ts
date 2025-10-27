@@ -1,7 +1,8 @@
 import { webpack } from "replugged";
 
-import type { DisplayProfile } from "./DisplayProfileUtils";
 import type Types from "@Types";
+
+import type { DisplayProfile } from "./DisplayProfile";
 
 export interface UserProfileContext {
   $$typeof: symbol;

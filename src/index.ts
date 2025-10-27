@@ -21,4 +21,4 @@ export const stop = (): void => {
 
 export { Settings } from "@components/Settings";
 
-export { _isAnimatedUSRBG, _getSettingBannerProps, uwuify } from "./plaintextFunctions";
+export { _isAnimatedUSRBG, _getSettingBannerProps } from "./plaintextFunctions";
