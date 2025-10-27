@@ -1,0 +1,9 @@
+.usrbg-instructions-image {
+  border-radius: 10%;
+}
+
+.usrbg-instructions {
+  border-width: 1px;
+  border-color: rgb(85, 85, 85);
+  border-style: dotted;
+}

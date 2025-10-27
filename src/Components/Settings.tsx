@@ -1,46 +1,52 @@
 import { util } from "replugged";
 import { toast as Toasts } from "replugged/common";
-import { ButtonItem, FormNotice, SwitchItem } from "replugged/components";
-import { PluginLogger, SettingValues, USRDB } from "../index";
-import { defaultSettings } from "../lib/consts";
-import Instruction from "./Instruction";
-import Utils from "../lib/utils";
-import Types from "../types";
+import { ButtonItem, FormNotice, Stack, Switch, Text } from "replugged/components";
+import { PluginLogger, SettingValues } from "@this";
+import { DefaultSettings } from "@consts";
+import Instruction from "@components/Instruction";
+import USRDB from "@USRDB";
 
 export const registerSettings = (): void => {
-  for (const key in defaultSettings) {
-    if (SettingValues.has(key as keyof Types.Settings)) return;
-    PluginLogger.log(`Adding new setting ${key} with value`, defaultSettings[key]);
-    SettingValues.set(key as keyof Types.Settings, defaultSettings[key]);
+  type DefaultSettings = typeof DefaultSettings;
+  type key = keyof DefaultSettings;
+  type value = DefaultSettings[key];
+
+  for (const key in DefaultSettings) {
+    if (SettingValues.has(key as key)) return;
+    PluginLogger.log(`Adding new setting ${key} with value ${DefaultSettings[key]}.`);
+    SettingValues.set(key as key, DefaultSettings[key] as value);
   }
 };
+
 export const reloadDatabase = async (): Promise<void> => {
-  USRDB.clear();
-  await Utils.loadUSRBD(true);
+  await USRDB.load(true);
   Toasts.toast("Reloaded USRBG Database.", Toasts.Kind.SUCCESS);
 };
+
 export const Settings = (): React.ReactElement => {
   return (
-    <div>
-      <SwitchItem
-        note="Show someone's Nitro banner instead of USRBG banner if they have one."
-        {...util.useSetting(SettingValues, "nitroBanner", defaultSettings.nitroBanner)}>
-        Prioritize Nitro banner
-      </SwitchItem>
-      <SwitchItem
-        note="Show full height banner in settings acccounts page."
-        {...util.useSetting(SettingValues, "settingsBanner", defaultSettings.settingsBanner)}>
-        Show Full Banner
-      </SwitchItem>
+    <Stack gap={24}>
+      <Switch
+        label="Prioritize Nitro banner"
+        description="Show someone's Nitro banner instead of USRBG banner if they have one."
+        {...util.useSetting(SettingValues, "nitroBanner", DefaultSettings.nitroBanner)}
+      />
+      <Switch
+        label="Show Full Banner"
+        description="Show full height banner in settings acccounts page."
+        {...util.useSetting(SettingValues, "settingsBanner", DefaultSettings.settingsBanner)}
+      />
       <ButtonItem
+        label="Reload USRBG database without restarting discord."
         button="Reload Database"
         onClick={() => {
-          reloadDatabase();
-        }}>
-        Reload USRBG database without restarting discord.
-      </ButtonItem>
+          void reloadDatabase();
+        }}
+      />
+
       <FormNotice
-        title="⋆｡ ﾟ☁︎｡ ⋆｡ ﾟ☾ ﾟ｡ ⋆ How to request your own USRBG banner"
+        // @ts-expect-error this accepts react element and is required otherwise wrong color
+        title={<Text>⋆｡ ﾟ☁︎｡ ⋆｡ ﾟ☾ ﾟ｡ ⋆ How to request your own USRBG banner</Text>}
         body={<Instruction />}
         className="usrbg-instructions"
         iconClassName="usrbg-instructions-image"
@@ -51,7 +57,7 @@ export const Settings = (): React.ReactElement => {
           src: "https://i.imgur.com/nDtUcX5.gif",
         }}
         type={FormNotice.Types.CUSTOM}></FormNotice>
-    </div>
+    </Stack>
   );
 };
 

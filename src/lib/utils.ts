@@ -1,99 +1,127 @@
-import { USRBG_URL } from "./consts";
-import { PluginLogger, USRDB, USRDBStatic } from "../index";
+import { util } from "replugged";
+import { PluginLogger, USRDBStatic } from "@this";
+import USRDB from "@USRDB";
 
 export class LimitedMap<K, V> extends Map<K, V> {
   private limit: number;
-  private keysQueue: K[] = [];
+  private keysQueue = new Set<K>();
+
   public constructor(limit: number) {
     super();
     this.limit = limit;
   }
+
+  public expire(): void {
+    const oldestKey: K = this.keysQueue.values().next().value;
+
+    if (oldestKey === void 0) return;
+
+    this.keysQueue.delete(oldestKey);
+    this.delete(oldestKey);
+  }
+
   public set(key: K, value: V): this {
-    if (this.size >= this.limit) {
-      const oldestKey = this.keysQueue.shift();
-      if (oldestKey !== void 0) {
-        this.delete(oldestKey);
-      }
-    }
-    super.set(key, value);
-    this.keysQueue.push(key);
-    return this;
+    if (this.size >= this.limit) this.expire();
+
+    this.keysQueue.add(key);
+    return super.set(key, value);
   }
 }
 
-export const gifToPng = async (url: string): Promise<string | null> => {
+export const GifToPng = async (url: string): Promise<string | null> => {
   try {
     const response = await fetch(url);
+    const { ok, headers } = response;
 
-    if (!response.ok) {
+    if (!ok) {
       return null;
     }
 
-    const contentType = response.headers.get("Content-Type");
-    if (contentType !== "image/gif") {
-      PluginLogger.log("URL is not a GIF");
+    if (headers.get("Content-Type") !== "image/gif") {
+      PluginLogger.verbose("URL is not a GIF", url);
       return null;
     }
 
-    const blob = await response.blob();
-    return new Promise((resolve, reject) => {
+    const gifBlob = await response.blob();
+
+    const dataUrl: string = await new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.onload = function (e) {
-        const img = new Image();
-        img.onload = function () {
-          const canvas = document.createElement("canvas");
-          const ctx = canvas.getContext("2d");
+      reader.onerror = reject;
 
+      reader.onload = ({ target: { result } }) => {
+        const img = new Image();
+        img.onerror = reject;
+
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
           canvas.width = img.width;
           canvas.height = img.height;
 
-          ctx.drawImage(img, 0, 0);
+          const canvasContext = canvas.getContext("2d");
+          canvasContext.drawImage(img, 0, 0);
 
-          const dataUrl = canvas.toDataURL("image/png");
+          canvas.toBlob((blob) => {
+            const pngObjectUrl = URL.createObjectURL(blob);
 
-          canvas.remove();
-
-          resolve(dataUrl);
+            resolve(pngObjectUrl);
+            canvas.remove();
+          }, "image/png");
         };
-        img.src = e.target.result as string;
+        if (typeof result !== "string") {
+          resolve(null);
+          return;
+        }
+
+        img.src = result;
       };
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
+
+      reader.readAsDataURL(gifBlob);
     });
+
+    return dataUrl;
   } catch (error) {
     PluginLogger.error("Error fetching or processing the GIF:", error);
     return null;
   }
 };
 
-export const tryUSRDBStatic = (userId): string => {
-  const imgUrl = USRDB.get(userId);
-  const img = USRDBStatic.get(`${userId}-${imgUrl}`);
-  if (img) return img;
-  if (img === null) return imgUrl;
-  void gifToPng(imgUrl).then((dataUri) => {
-    USRDBStatic.set(`${userId}-${imgUrl}`, dataUri);
-    if (dataUri === null) return;
-    const banner = document.querySelector(`[style*="${imgUrl}"]`);
-    if (banner) (banner as HTMLDivElement).style.backgroundImage = `url(${dataUri})`;
-  });
-  return imgUrl;
+export const loadUSRDBStatic = async ({
+  bannerUrl,
+  key,
+}: {
+  bannerUrl: string;
+  key: string;
+}): Promise<void> => {
+  USRDBStatic.set(key, null);
+
+  const dataUri = await GifToPng(bannerUrl);
+  USRDBStatic.set(key, dataUri);
+
+  if (dataUri === null) return;
+
+  const banner: HTMLDivElement = document.querySelector(`[class^="banner"][style*="${bannerUrl}"]`);
+  if (!banner) return;
+
+  const reactInstance = util.getReactInstance(banner);
+  if (!reactInstance.return) return;
+  console.log({ ...reactInstance });
+  reactInstance.return.key = "USRDBStatic";
 };
 
-export const loadUSRBD = async (reload?: boolean): Promise<void> => {
-  const fetchStart = performance.now();
-  const USRBG_RESPONSE = await fetch(USRBG_URL);
-  const USRBG_JSON = await USRBG_RESPONSE.json();
-  for (const [USRBG_USERID, USRBG_ETAG] of Object.entries(USRBG_JSON.users))
-    USRDB.set(
-      USRBG_USERID,
-      `${USRBG_JSON.endpoint}/${USRBG_JSON.bucket}/${USRBG_JSON.prefix}${USRBG_USERID}?${
-        USRBG_ETAG as string
-      }`,
-    );
-  const fetchEnd = performance.now();
-  PluginLogger.log(
-    `${reload ? "Reloaded" : "Loaded"} USRBG Database in ${(fetchEnd - fetchStart).toFixed(2)}ms.`,
-  );
+export const tryUSRDBStatic = (userId: string): string => {
+  if (!USRDB.has(userId)) return;
+
+  const bannerUrl = USRDB.get(userId);
+
+  const key = `${userId}-${bannerUrl}`;
+
+  const png = USRDBStatic.get(key);
+
+  if (png !== undefined) return png === null ? bannerUrl : png;
+
+  void loadUSRDBStatic({ bannerUrl, key });
+
+  return bannerUrl;
 };
-export default { LimitedMap, gifToPng, tryUSRDBStatic, loadUSRBD };
+
+export default { LimitedMap, GifToPng, loadUSRDBStatic, tryUSRDBStatic };

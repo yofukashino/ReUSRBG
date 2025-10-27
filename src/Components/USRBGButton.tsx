@@ -1,28 +1,26 @@
-import {
-  fluxDispatcher as FluxDispatcher,
-  toast as Toasts,
-  guilds as UltimateGuildStore,
-} from "replugged/common";
+import { fluxDispatcher, guilds, toast } from "replugged/common";
 import { Clickable, Tooltip } from "replugged/components";
-import { USBBG_SERVER_ID, USBBG_SERVER_INVITE_CODE } from "../lib/consts";
-import Modules from "../lib/requiredModules";
+import { USBBG_SERVER_ID, USBBG_SERVER_INVITE_CODE } from "@consts";
+import { InviteActions, RoutingUtils } from "@lib/RequiredModules";
 
-export default () => (
+export default (): React.ReactElement => (
   <Clickable
     className="usrbg-header"
-    onClick={async (): Promise<void> => {
-      if (UltimateGuildStore.getGuild(USBBG_SERVER_ID)) {
-        FluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
-        Modules.RoutingUtils?.transitionTo(`/channels/449175561529589761/886287835018178560`);
+    onClick={(): void => {
+      if (guilds.getGuild(USBBG_SERVER_ID)) {
+        fluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
+        RoutingUtils?.transitionTo(`/channels/449175561529589761/886287835018178560`);
         return;
       }
-      const inviteInfo = await Modules.InviteActions?.resolveInvite(USBBG_SERVER_INVITE_CODE);
+
+      const inviteInfo = InviteActions?.resolveInvite(USBBG_SERVER_INVITE_CODE);
+
       if (inviteInfo.invite == null) {
-        Toasts.toast("Error Resolving Invite, Try Different Invite.", Toasts.Kind.FAILURE);
+        toast.toast("Error Resolving Invite, Try Again later.", toast.Kind.FAILURE);
         return;
       }
-      FluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
-      FluxDispatcher.dispatch({
+      fluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
+      fluxDispatcher.dispatch({
         type: "INVITE_MODAL_OPEN",
         ...inviteInfo,
       });

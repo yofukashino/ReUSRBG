@@ -1,25 +1,24 @@
 import { Injector, Logger, settings } from "replugged";
-import { defaultSettings } from "./lib/consts";
+import { DefaultSettings } from "@consts";
+import Settings from "@components/Settings";
+import Injections from "@Injections";
+import Utils from "@Utils";
 import "./style.css";
+
 export const PluginInjector = new Injector();
-export const PluginLogger = Logger.plugin("ReUSRBG", "#b380ff");
-export const USRDB = new Map<string, string>();
-export const SettingValues = settings.init("dev.tharki.ReUSRBG", defaultSettings);
-import Settings from "./Components/Settings";
-import Injections from "./injections/index";
-import Utils from "./lib/utils";
+export const PluginLogger = Logger.plugin("ReUSRBG", "#ffffff80");
+export const SettingValues = settings.init("dev.tharki.ReUSRBG", DefaultSettings);
 export const USRDBStatic = new Utils.LimitedMap<string, string | null>(250);
 
 export const start = (): void => {
-  void Utils.loadUSRBD();
   Settings.registerSettings();
-  void Injections.applyInjections().catch((err) => PluginLogger.error(err));
+  void Injections.applyInjections();
 };
 
 export const stop = (): void => {
-  PluginInjector.uninjectAll();
+  Injections.removeInjections();
 };
 
-export { Settings } from "./Components/Settings";
+export { Settings } from "@components/Settings";
 
-export { _isAnimatedUSRBG } from "./plaintextFunctions";
+export { _isAnimatedUSRBG, _getSettingBannerProps, uwuify } from "./plaintextFunctions";

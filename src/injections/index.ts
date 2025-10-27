@@ -1,14 +1,23 @@
-import Modules from "../lib/requiredModules";
-import injectBannerLoader from "./BannerLoader";
-import injectBanners from "./Banners";
-import injectDisplayProfileUtils from "./DisplayProfileUtils";
-import injectUserProfileContext from "./UserProfileContext";
+import { PluginInjector, PluginLogger } from "@this";
+import Modules from "@lib/RequiredModules";
+
+const InjectionNames = [
+  "BannerLoader.ts",
+  "DisplayProfileUtils.ts",
+  "UserProfileContext.tsx",
+] as const;
+
 export const applyInjections = async (): Promise<void> => {
-  await Modules.loadModules();
-  injectBannerLoader();
-  void injectBanners();
-  injectDisplayProfileUtils();
-  injectUserProfileContext();
+  try {
+    await Modules.loadModules();
+    await Promise.all(InjectionNames.map((name) => import(`./${name}`)));
+  } catch (err: unknown) {
+    PluginLogger.error(err);
+  }
 };
 
-export default { applyInjections };
+export const removeInjections = (): void => {
+  PluginInjector.uninjectAll();
+};
+
+export default { applyInjections, removeInjections };

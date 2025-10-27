@@ -1,6 +1,22 @@
-.usrbg-header span {
+.headerButtonWrapper {
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  transition: opacity 0.6s ease;
+  z-index: var(--custom-user-profile-top-layer-z-index);
+  right: 12px;
+  top: 12px;
+}
+.user-profile-modal-v2 .headerButtonWrapper,
+.user-profile-modal .headerButtonWrapper {
+  right: 24px;
+  top: 20px;
+}
+
+.usrbg-header {
   border-radius: var(--radius-round);
-  transition: background-color var(--custom-button-transition-duration) ease,
+  transition:
+    background-color var(--custom-button-transition-duration) ease,
     color var(--custom-button-transition-duration) ease;
   background: var(--redesign-button-overlay-alpha-background);
   cursor: pointer;
@@ -8,82 +24,10 @@
   display: flex;
 }
 
-.usrbg-header span:hover {
-  background: var(--redesign-button-overlay-alpha-pressed-background);
-}
-
-.usrbg-header span svg {
-  height: 16px !important;
-  width: 16px !important;
-}
-
-[class^="banner"] > .usr-bg-icon-clickable {
-  opacity: 0% !important;
-  border-radius: 50px;
-  background-color: rgba(10, 10, 10, 0.375);
-  height: 24px;
-  width: 24px;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  transition: all 0.2s ease-in-out;
-}
-
-[class^="banner"]:hover > .usr-bg-icon-clickable {
-  opacity: 100% !important;
-}
-
-[class^="accountProfileCard"] .usrbg {
-  min-height: 233px !important;
-}
-
-[class^="accountProfileCard"] .usrbg mask circle {
-  cy: 253 !important;
-}
-
-[class^="accountProfileCard"] .usrbg [class^="banner"] {
-  height: 223px !important;
-  min-height: 223px !important;
-}
-
-[class^="accountProfileCard"] .usrbg + div [class*="avatar_"] {
-  top: 213px !important;
-}
-
-.usrbg-instructions-image {
-  border-radius: 10%;
-}
-
-.usrbg-instructions {
-  border-width: 1px;
-  border-color: rgb(85, 85, 85);
-
-  border-style: dotted;
-}
-
-.headerButtonWrapper {
-  display: flex;
-  gap: 8px;
-  position: absolute;
-  transition: opacity 0.6s ease;
-  z-index: 3;
+.usrbg-settings-avatar {
+  top: 214px !important;
 }
 
 .headerButtonWrapper:empty {
   display: none;
-}
-
-.user-profile-popout .headerButtonWrapper {
-  right: 12px;
-  top: 12px;
-}
-
-.user-profile-modal .headerButtonWrapper {
-  right: 16px;
-  top: 12px;
-}
-
-.user-profile-sidebar .headerButtonWrapper {
-  right: 8px;
-  top: 8px;
 }
